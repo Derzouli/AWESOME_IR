@@ -20,4 +20,5 @@ http://www.beyondlogic.org/usbnutshell/usb5.shtml
 
 PIC32 USB STACK
 http://ww1.microchip.com/downloads/en/AppNotes/01176A.pdf
+http://events.linuxfoundation.org/sites/events/files/slides/elc_2014_usb_0.pdf
 
