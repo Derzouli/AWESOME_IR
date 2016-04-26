@@ -18,3 +18,6 @@ http://microchip.wikidot.com/usb:development
 
 http://www.beyondlogic.org/usbnutshell/usb5.shtml
 
+PIC32 USB STACK
+http://ww1.microchip.com/downloads/en/AppNotes/01176A.pdf
+
