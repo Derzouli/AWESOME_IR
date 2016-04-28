@@ -23,3 +23,6 @@ http://ww1.microchip.com/downloads/en/AppNotes/01176A.pdf
 http://events.linuxfoundation.org/sites/events/files/slides/elc_2014_usb_0.pdf
 http://ww1.microchip.com/downloads/en/AppNotes/01166a.pdf
 
+TSOP DATASHEET TSOP28238
+http://www.vishay.com/docs/82491/tsop382.pdf
+
