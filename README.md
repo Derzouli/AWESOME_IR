@@ -26,3 +26,5 @@ http://ww1.microchip.com/downloads/en/AppNotes/01166a.pdf
 TSOP DATASHEET TSOP28238
 http://www.vishay.com/docs/82491/tsop382.pdf
 
+#### USB HID report descriptor
+http://eleccelerator.com/tutorial-about-usb-hid-report-descriptors/
