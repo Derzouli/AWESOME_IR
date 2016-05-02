@@ -31,3 +31,7 @@ http://eleccelerator.com/tutorial-about-usb-hid-report-descriptors/
 
 ##### USB (binary) packets analyzer
 http://eleccelerator.com/usbdescreqparser/
+
+#### OLIMEX PIC32 MX340F512
+https://www.olimex.com/Products/PIC/Proto/PIC-32MX/
+http://www.microchip.com/wwwproducts/en/PIC32MX340F512H
