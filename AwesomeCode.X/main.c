@@ -8,8 +8,9 @@
 
 # include "fcts.h"
 
-u32 reception[20];
+u32 reception[50];
 u8  static_index = 0;
+u8 index = 0;
 
 	__attribute__((interrupt(IPL4AUTO), nomips16, vector(_EXTERNAL_2_VECTOR)))
 void			ir_receive(void)
@@ -47,8 +48,7 @@ void			ir_receive(void)
 __attribute__((interrupt(IPL4AUTO), nomips16, vector(_INPUT_CAPTURE_2_VECTOR)))
 void    incap(void)
 {
-    reception[static_index] = (IC2BUF / 40);
-    reception[static_index] = (IC2BUF / 40) - reception[static_index];
+    reception[static_index] = IC2BUF;
     static_index++;
     IFS0bits.IC2IF = 0;
 }
@@ -66,9 +66,10 @@ int main(void)
  *  IC2CONbits.ICBNE : buffer state : 0 empty, 1 not empty but not full
  */
         IC2CONbits.SIDL = 0;    // don't stop in sleep mode (useless now)
-        IC2CONbits.ICM = 001;   // capture every event (rising/falling signal)
+        IC2CONbits.ICM = 0b110;   // capture every edge (rising/falling signal)
+        IC2CONbits.FEDGE = 0;   // capture falling edge first
         IC2CONbits.C32 = 1;     // use a 32-bits timer
-        IC2CONbits.ICI = 01;    // interrupt each 2 events
+        IC2CONbits.ICI = 00;    // interrupt each event
         IC2CONbits.ON = 1;
 
         IEC0bits.IC2IE = 1;
@@ -92,20 +93,22 @@ int main(void)
 	uart_putstr("begin !\n\r");
 	while (1)
         {
-            if (static_index > 19)
+            if (static_index > 40)
             {
                 IEC0bits.IC2IE = 0;
-                while (1)
+                while (index < static_index)
                 {
-                    uart_putnbr(static_index, 10);
+                    uart_putnbr(index, 10);
                     uart_putstr("\t: ");
-                    uart_putnbr(reception[static_index], 10);
+                    if (reception[index + 1] > reception[index])
+                        uart_putnbr((reception[index + 1] - reception[index]) / 40, 10);
+                    else
+                        uart_putstr("error");
                     uart_putstr("\n\r");
-                    if (static_index == 0)
-                        break ;
-                    static_index--;
+                    index++;
                 }
                 static_index = 0;
+                index = 0;
                 IEC0bits.IC2IE = 1;
             }
         }
