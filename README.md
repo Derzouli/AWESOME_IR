@@ -33,3 +33,8 @@ Datasheet de la carte PIC32
 #### OLIMEX PIC32 MX340F512
 * https://www.olimex.com/Products/PIC/Proto/PIC-32MX/
 * http://www.microchip.com/wwwproducts/en/PIC32MX340F512H
+* 
+
+### CABLE UART
+http://www.ftdichip.com/Support/Documents/DataSheets/Cables/DS_TTL-232R_CABLES.pdf
+
