@@ -1,0 +1,44 @@
+Added Component: Designator=C3(CAPC2012N)
+Added Component: Designator=C5(CAPC2012N)
+Added Component: Designator=PIC1(PIC32MX220)
+Added Component: Designator=S1(SPST-2)
+Added Component: Designator=TSOP1(TSOP38238)
+Added Component: Designator=Voltage regulator1(LDO_REG)
+Added Component: Designator=Y1(R38)
+Added Pin To Net: NetName=D+ Pin=PIC1-21
+Added Net: Name=D+
+Added Pin To Net: NetName=D- Pin=PIC1-22
+Added Net: Name=D-
+Added Pin To Net: NetName=GND Pin=C5-1
+Added Pin To Net: NetName=GND Pin=C5-1
+Added Pin To Net: NetName=GND Pin=PIC1-8
+Added Pin To Net: NetName=GND Pin=PIC1-27
+Added Pin To Net: NetName=GND Pin=S1-1
+Added Net: Name=GND
+Added Net: Name=NetC2_2
+Added Pin To Net: NetName=NetC4_1 Pin=PIC1-19
+Added Net: Name=NetC4_1
+Added Pin To Net: NetName=NetC4_2 Pin=PIC1-20
+Added Net: Name=NetC4_2
+Added Pin To Net: NetName=Netconnecteur usb1_1 Pin=Voltage regulator1-1
+Added Net: Name=Netconnecteur usb1_1
+Added Net: Name=NetD1_1
+Added Pin To Net: NetName=NetPIC1_5 Pin=PIC1-5
+Added Net: Name=NetPIC1_5
+Added Pin To Net: NetName=NetPIC1_16 Pin=PIC1-16
+Added Net: Name=NetPIC1_16
+Added Pin To Net: NetName=NetR2_1 Pin=S1-2
+Added Net: Name=NetR2_1
+Added Net: Name=RST
+Added Pin To Net: NetName=VDD Pin=C3-1
+Added Pin To Net: NetName=VDD Pin=C3-1
+Added Pin To Net: NetName=VDD Pin=PIC1-13
+Added Pin To Net: NetName=VDD Pin=PIC1-23
+Added Pin To Net: NetName=VDD Pin=PIC1-28
+Added Net: Name=VDD
+Added Pin To Net: NetName=X1 Pin=Y1-1
+Added Net: Name=X1
+Added Pin To Net: NetName=X2 Pin=Y1-2
+Added Net: Name=X2
+Added Class: Name=AwesomeRemote
+Added Room: Name=AwesomeRemote
