@@ -10,7 +10,6 @@
 
 u32 reception[50];
 u8  static_index = 0;
-u8 index = 0;
 
 	__attribute__((interrupt(IPL4AUTO), nomips16, vector(_EXTERNAL_2_VECTOR)))
 void			ir_receive(void)
@@ -66,8 +65,7 @@ int main(void)
  *  IC2CONbits.ICBNE : buffer state : 0 empty, 1 not empty but not full
  */
         IC2CONbits.SIDL = 0;    // don't stop in sleep mode (useless now)
-        IC2CONbits.ICM = 0b110;   // capture every edge (rising/falling signal)
-        IC2CONbits.FEDGE = 0;   // capture falling edge first
+        IC2CONbits.ICM = 1;   // capture every edge (rising/falling signal)
         IC2CONbits.C32 = 1;     // use a 32-bits timer
         IC2CONbits.ICI = 00;    // interrupt each event
         IC2CONbits.ON = 1;
@@ -77,9 +75,9 @@ int main(void)
         IPC2bits.IC2IP = 4;
 
 
-	asm("ei");		// enable interrupts
+
 	INTCONbits.MVEC = 1;	// multi-vectors mode for interrupt
-	IEC0bits.INT2IE = 0;	// external interrupt 2 (TSOP) enabled
+	IEC0bits.INT2IE = 0;	// external interrupt 2 (TSOP)
 	IFS0bits.INT2IF = 0;	// interrupt flag for ext int 2 cleared (just in case)
 	IPC2bits.INT2IP = 4;	// priority of ext int 2 at 4 (same value as in ISR attributes )
 
@@ -89,11 +87,17 @@ int main(void)
 	IEC0bits.T2IE = 0;	// timer enabled (line bottom) but no interrupt
 	T2CONbits.ON = 1;
 
+        asm("ei");		// enable interrupts
+
 	uart_init(9600, 40000000);
 	uart_putstr("begin !\n\r");
+
+
+        u8 index = 0;
+
 	while (1)
         {
-            if (static_index > 40)
+            if (static_index >= 39)
             {
                 IEC0bits.IC2IE = 0;
                 while (index < static_index)
@@ -105,7 +109,7 @@ int main(void)
                     else
                         uart_putstr("error");
                     uart_putstr("\n\r");
-                    index++;
+                    index += 2;
                 }
                 static_index = 0;
                 index = 0;
