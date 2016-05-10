@@ -119,11 +119,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=YOBQINPB
-
-[GeneratedDocument1]
-DocumentPath=Project Outputs for PCB_Project\AwesomeRemote.REP
-DItemRevisionGUID=
+DocumentUniqueId=ISCDCHOD
 
 [Configuration1]
 Name=Default Configuration
