@@ -1,0 +1,78 @@
+Added Component: Designator=C1(RAD-0.3)
+Added Component: Designator=C2(RAD-0.3)
+Added Component: Designator=C3(RAD-0.3)
+Added Component: Designator=C4(RAD-0.3)
+Added Component: Designator=C5(RAD-0.3)
+Added Component: Designator=C6(RAD-0.3)
+Added Component: Designator=C7(RAD-0.3)
+Added Component: Designator=C8(RAD-0.3)
+Added Component: Designator=C9(RAD-0.3)
+Added Component: Designator=C10(RAD-0.3)
+Added Component: Designator=D1(LED-0)
+Added Component: Designator=D2(LED-0)
+Added Component: Designator=J2(6-pins)
+Added Component: Designator=J3(USB_B_FEM)
+Added Component: Designator=PS1(LDO_REG)
+Added Component: Designator=R1(AXIAL-0.3)
+Added Component: Designator=R2(AXIAL-0.3)
+Added Component: Designator=R3(AXIAL-0.3)
+Added Component: Designator=R4(AXIAL-0.3)
+Added Component: Designator=R5(AXIAL-0.3)
+Added Component: Designator=U1(TSOP38238)
+Added Component: Designator=U2(PIC32MX220)
+Added Component: Designator=Y1(R38)
+Added Pin To Net: NetName=D+ Pin=J3-2
+Added Pin To Net: NetName=D+ Pin=U2-21
+Added Net: Name=D+
+Added Pin To Net: NetName=D- Pin=J3-3
+Added Pin To Net: NetName=D- Pin=U2-22
+Added Net: Name=D-
+Added Pin To Net: NetName=GND Pin=J3-4
+Added Pin To Net: NetName=GND Pin=PS1-2
+Added Pin To Net: NetName=GND Pin=PS1-4
+Added Pin To Net: NetName=GND Pin=U1-2
+Added Pin To Net: NetName=GND Pin=U2-8
+Added Pin To Net: NetName=GND Pin=U2-19
+Added Pin To Net: NetName=GND Pin=U2-27
+Added Net: Name=GND
+Added Net: Name=NetC1_2
+Added Pin To Net: NetName=NetC2_2 Pin=U1-3
+Added Net: Name=NetC2_2
+Added Pin To Net: NetName=NetC4_2 Pin=U2-20
+Added Net: Name=NetC4_2
+Added Pin To Net: NetName=NetC10_2 Pin=J3-1
+Added Pin To Net: NetName=NetC10_2 Pin=PS1-1
+Added Net: Name=NetC10_2
+Added Net: Name=NetD1_1
+Added Pin To Net: NetName=NetJ2_4 Pin=J2-4
+Added Pin To Net: NetName=NetJ2_4 Pin=U2-2
+Added Net: Name=NetJ2_4
+Added Pin To Net: NetName=NetJ2_5 Pin=J2-5
+Added Pin To Net: NetName=NetJ2_5 Pin=U2-3
+Added Net: Name=NetJ2_5
+Added Pin To Net: NetName=NetR5_1 Pin=U2-7
+Added Net: Name=NetR5_1
+Added Pin To Net: NetName=NetU1_1 Pin=U1-1
+Added Pin To Net: NetName=NetU1_1 Pin=U2-16
+Added Net: Name=NetU1_1
+Added Pin To Net: NetName=RST Pin=J2-1
+Added Pin To Net: NetName=RST Pin=U2-1
+Added Net: Name=RST
+Added Pin To Net: NetName=RX Pin=U2-5
+Added Net: Name=RX
+Added Pin To Net: NetName=TX Pin=U2-4
+Added Net: Name=TX
+Added Pin To Net: NetName=VDD Pin=J2-2
+Added Pin To Net: NetName=VDD Pin=PS1-3
+Added Pin To Net: NetName=VDD Pin=U2-13
+Added Pin To Net: NetName=VDD Pin=U2-23
+Added Pin To Net: NetName=VDD Pin=U2-28
+Added Net: Name=VDD
+Added Pin To Net: NetName=VSS Pin=J2-3
+Added Net: Name=VSS
+Added Pin To Net: NetName=X1 Pin=U2-9
+Added Net: Name=X1
+Added Pin To Net: NetName=X2 Pin=U2-10
+Added Net: Name=X2
+Added Class: Name=AwesomeRemote
+Added Room: Name=AwesomeRemote
