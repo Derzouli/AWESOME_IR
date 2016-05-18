@@ -1,0 +1,6 @@
+Change Component Comment : Designator=J2 Old Comment=ICD3_CON New Comment=DEBUG
+Change Component Comment : Designator=U1 Old Comment=IR Receiver New Comment=2251359
+Change Component Comment : Designator=S1 Old Comment=PUSH_BUT New Comment=2468741
+Change Component Comment : Designator=J3 Old Comment=USB_CON New Comment=1753809
+Change Component Comment : Designator=U3 Old Comment=VOLTAGE_REG New Comment=1578379
+Change Component Description : Designator=J2 Old Description= New Description=DEBUG
