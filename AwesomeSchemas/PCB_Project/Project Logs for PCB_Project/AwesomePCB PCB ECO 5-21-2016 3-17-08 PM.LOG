@@ -1,0 +1,5 @@
+Added Component: Designator=S1(PUSH_BUTTON)
+Added Pin To Net: NetName=NetC1_2 Pin=S1-0
+Added Pin To Net: NetName=GND Pin=S1-1
+Added Member To Class: ClassName=AwesomeRemote Member=Component S1 2468741
+Added Room: Name=AwesomeRemote

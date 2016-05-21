@@ -1,0 +1,98 @@
+Added Component: Designator=C1(CAPC2012N)
+Added Component: Designator=C2(CAPC2012N)
+Added Component: Designator=C3(CAPC2012N)
+Added Component: Designator=C4(CAPC2012N)
+Added Component: Designator=C5(CAPC2012N)
+Added Component: Designator=C6(CAPC2012N)
+Added Component: Designator=C7(CAPC2012N)
+Added Component: Designator=C8(CAPC2012N)
+Added Component: Designator=C9(CAPC2012N)
+Added Component: Designator=D1(LED-0)
+Added Component: Designator=D2(LED-0)
+Added Component: Designator=PIC1(PIC32MX220)
+Added Component: Designator=R1(AXIAL-0.3)
+Added Component: Designator=R2(AXIAL-0.3)
+Added Component: Designator=R3(AXIAL-0.3)
+Added Component: Designator=R4(AXIAL-0.3)
+Added Component: Designator=R5(AXIAL-0.3)
+Added Component: Designator=S1(SPST-2)
+Added Component: Designator=TSOP1(TSOP38238)
+Added Component: Designator=VREG1(LDO_REG)
+Added Component: Designator=Y1(R38)
+Added Pin To Net: NetName=D+ Pin=PIC1-21
+Added Net: Name=D+
+Added Pin To Net: NetName=D- Pin=PIC1-22
+Added Net: Name=D-
+Added Pin To Net: NetName=GND Pin=C1-1
+Added Pin To Net: NetName=GND Pin=C1-1
+Added Pin To Net: NetName=GND Pin=C2-1
+Added Pin To Net: NetName=GND Pin=C2-1
+Added Pin To Net: NetName=GND Pin=C5-1
+Added Pin To Net: NetName=GND Pin=C5-1
+Added Pin To Net: NetName=GND Pin=C9-1
+Added Pin To Net: NetName=GND Pin=C9-1
+Added Pin To Net: NetName=GND Pin=D1-2
+Added Pin To Net: NetName=GND Pin=D2-2
+Added Pin To Net: NetName=GND Pin=PIC1-8
+Added Pin To Net: NetName=GND Pin=PIC1-27
+Added Pin To Net: NetName=GND Pin=S1-1
+Added Pin To Net: NetName=GND Pin=TSOP1-2
+Added Net: Name=GND
+Added Pin To Net: NetName=NetC1_2 Pin=R2-1
+Added Pin To Net: NetName=NetC1_2 Pin=S1-2
+Added Net: Name=NetC1_2
+Added Pin To Net: NetName=NetC2_2 Pin=R3-1
+Added Pin To Net: NetName=NetC2_2 Pin=TSOP1-3
+Added Net: Name=NetC2_2
+Added Pin To Net: NetName=NetC4_1 Pin=C4-1
+Added Pin To Net: NetName=NetC4_1 Pin=C4-1
+Added Pin To Net: NetName=NetC4_1 Pin=PIC1-19
+Added Net: Name=NetC4_1
+Added Pin To Net: NetName=NetC4_2 Pin=PIC1-20
+Added Net: Name=NetC4_2
+Added Pin To Net: NetName=NetC9_2 Pin=VREG1-1
+Added Net: Name=NetC9_2
+Added Pin To Net: NetName=NetD1_1 Pin=D1-1
+Added Pin To Net: NetName=NetD1_1 Pin=R4-2
+Added Net: Name=NetD1_1
+Added Pin To Net: NetName=NetD2_1 Pin=D2-1
+Added Pin To Net: NetName=NetD2_1 Pin=R5-1
+Added Net: Name=NetD2_1
+Added Pin To Net: NetName=NetICSP1_4 Pin=PIC1-2
+Added Net: Name=NetICSP1_4
+Added Pin To Net: NetName=NetICSP1_5 Pin=PIC1-3
+Added Net: Name=NetICSP1_5
+Added Pin To Net: NetName=NetPIC1_5 Pin=PIC1-5
+Added Pin To Net: NetName=NetPIC1_5 Pin=R4-1
+Added Net: Name=NetPIC1_5
+Added Pin To Net: NetName=NetPIC1_16 Pin=PIC1-16
+Added Pin To Net: NetName=NetPIC1_16 Pin=TSOP1-1
+Added Net: Name=NetPIC1_16
+Added Pin To Net: NetName=RST Pin=PIC1-1
+Added Pin To Net: NetName=RST Pin=R1-1
+Added Pin To Net: NetName=RST Pin=R2-2
+Added Net: Name=RST
+Added Pin To Net: NetName=VDD Pin=C3-1
+Added Pin To Net: NetName=VDD Pin=C3-1
+Added Pin To Net: NetName=VDD Pin=C6-1
+Added Pin To Net: NetName=VDD Pin=C6-1
+Added Pin To Net: NetName=VDD Pin=PIC1-13
+Added Pin To Net: NetName=VDD Pin=PIC1-23
+Added Pin To Net: NetName=VDD Pin=PIC1-28
+Added Pin To Net: NetName=VDD Pin=R1-2
+Added Pin To Net: NetName=VDD Pin=R3-2
+Added Pin To Net: NetName=VDD Pin=R5-2
+Added Net: Name=VDD
+Added Net: Name=VSS
+Added Pin To Net: NetName=X1 Pin=C7-1
+Added Pin To Net: NetName=X1 Pin=C7-1
+Added Pin To Net: NetName=X1 Pin=PIC1-9
+Added Pin To Net: NetName=X1 Pin=Y1-1
+Added Net: Name=X1
+Added Pin To Net: NetName=X2 Pin=C8-1
+Added Pin To Net: NetName=X2 Pin=C8-1
+Added Pin To Net: NetName=X2 Pin=PIC1-10
+Added Pin To Net: NetName=X2 Pin=Y1-2
+Added Net: Name=X2
+Added Class: Name=AwesomeRemote
+Added Room: Name=AwesomeRemote
