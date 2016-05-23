@@ -28,7 +28,7 @@ PowerPortNamesTakePriority=0
 PushECOToAnnotationFile=1
 DItemRevisionGUID=
 ReportSuppressedErrorsInMessages=0
-OutputPath=
+OutputPath=Project Outputs for PCB_Project
 LogFolderPath=
 ManagedProjectGUID=
 
@@ -122,7 +122,55 @@ GenerateClassCluster=0
 DocumentUniqueId=IIBBCDDE
 
 [GeneratedDocument1]
+DocumentPath=.\outputs\Assembly Testpoint Report for AwesomePCB.csv
+DItemRevisionGUID=
+
+[GeneratedDocument2]
+DocumentPath=.\outputs\Assembly Testpoint Report for AwesomePCB.txt
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=.\outputs\AwesomePCB.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument4]
+DocumentPath=.\outputs\AwesomePCB.EXTREP
+DItemRevisionGUID=
+
+[GeneratedDocument5]
+DocumentPath=.\outputs\AwesomePCB.html
+DItemRevisionGUID=
+
+[GeneratedDocument6]
+DocumentPath=.\outputs\AwesomePCB.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument7]
+DocumentPath=.\outputs\AwesomePCB.REP
+DItemRevisionGUID=
+
+[GeneratedDocument8]
+DocumentPath=.\outputs\AwesomePCB.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument9]
+DocumentPath=.\outputs\AwesomePCB.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument10]
+DocumentPath=.\outputs\Bill of Materials-AwesomeRemote.csv
+DItemRevisionGUID=
+
+[GeneratedDocument11]
 DocumentPath=Project Outputs for PCB_Project\Design Rule Check - AwesomePCB.html
+DItemRevisionGUID=
+
+[GeneratedDocument12]
+DocumentPath=.\outputs\Pick Place for AwesomePCB.csv
+DItemRevisionGUID=
+
+[GeneratedDocument13]
+DocumentPath=.\outputs\Pick Place for AwesomePCB.txt
 DItemRevisionGUID=
 
 [Configuration1]
@@ -136,7 +184,7 @@ GenerateBOM=1
 OutputJobsCount=0
 
 [Generic_EDE]
-OutputDir=
+OutputDir=Project Outputs for PCB_Project
 
 [OutputGroup1]
 Name=Netlist Outputs

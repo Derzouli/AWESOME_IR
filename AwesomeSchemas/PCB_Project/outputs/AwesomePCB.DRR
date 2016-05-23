@@ -1,0 +1,19 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: AwesomePCB.PcbDoc   5/23/2016  9:59:59 AM
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : AwesomePCB.TXT
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        0.7112mm (28mil)         Round          10               92.35 mm (3.64 Inch)
+T2        0.9mm (35.433mil)        Round          3                5.08 mm (0.20 Inch)
+T3        0.92mm (36.221mil)       Round          4                8.10 mm (0.32 Inch)
+T4        0.93mm (36.614mil)       Round          12               31.72 mm (1.25 Inch)
+T5        1mm (39.37mil)           Round          4                21.76 mm (0.86 Inch)
+T6        2.3mm (90.551mil)        Round          2                12.80 mm (0.50 Inch)
+---------------------------------------------------------------------------
+Totals                                            35               171.81 mm (6.76 Inch)
+
+Total Processing Time (hh:mm:ss) : 00:00:00
