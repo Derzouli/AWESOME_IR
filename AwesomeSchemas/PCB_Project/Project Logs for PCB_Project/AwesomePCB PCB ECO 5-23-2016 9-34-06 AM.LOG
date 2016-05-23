@@ -1,0 +1,6 @@
+Added Component: Designator=U3(LDO_REG)
+Added Pin To Net: NetName=NetC10_2 Pin=U3-1
+Added Pin To Net: NetName=GND Pin=U3-2
+Added Pin To Net: NetName=VDD Pin=U3-3
+Added Pin To Net: NetName=GND Pin=U3-4
+Added Member To Class: ClassName=AwesomeRemote Member=Component U3 1578379

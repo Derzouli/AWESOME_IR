@@ -1,0 +1,4 @@
+Added Component: Designator=Y1(XTAL139X50X45)
+Added Pin To Net: NetName=X1 Pin=Y1-1
+Added Pin To Net: NetName=X2 Pin=Y1-2
+Added Member To Class: ClassName=AwesomeRemote Member=Component Y1 4MHz

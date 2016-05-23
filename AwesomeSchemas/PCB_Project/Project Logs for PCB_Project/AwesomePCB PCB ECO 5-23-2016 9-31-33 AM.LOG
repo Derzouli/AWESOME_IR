@@ -1,0 +1,5 @@
+Added Component: Designator=U1(TSOP38238)
+Added Pin To Net: NetName=NetU1_1 Pin=U1-1
+Added Pin To Net: NetName=GND Pin=U1-2
+Added Pin To Net: NetName=NetC2_2 Pin=U1-3
+Added Member To Class: ClassName=AwesomeRemote Member=Component U1 2251359
