@@ -138,6 +138,40 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
+[Document7]
+DocumentPath=CAMtastic2.Cam
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
+[Document8]
+DocumentPath=CAMtastic3.Cam
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=
+
 [GeneratedDocument1]
 DocumentPath=outputs\Assembly Testpoint Report for AwesomePCB.csv
 DItemRevisionGUID=
@@ -147,7 +181,7 @@ DocumentPath=outputs\Assembly Testpoint Report for AwesomePCB.txt
 DItemRevisionGUID=
 
 [GeneratedDocument3]
-DocumentPath=.\outputs\AwesomePCB.DRR
+DocumentPath=.\FabFolder\NC Drill\AwesomePCB.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument4]
@@ -155,7 +189,7 @@ DocumentPath=outputs\AwesomePCB.DRR
 DItemRevisionGUID=
 
 [GeneratedDocument5]
-DocumentPath=.\outputs\AwesomePCB.EXTREP
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument6]
@@ -163,86 +197,122 @@ DocumentPath=outputs\AwesomePCB.EXTREP
 DItemRevisionGUID=
 
 [GeneratedDocument7]
-DocumentPath=.\outputs\AwesomePCB.GBL
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument8]
-DocumentPath=.\outputs\AwesomePCB.GBO
+DocumentPath=outputs\AwesomePCB.GBL
 DItemRevisionGUID=
 
 [GeneratedDocument9]
-DocumentPath=.\outputs\AwesomePCB.GBS
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.GBO
 DItemRevisionGUID=
 
 [GeneratedDocument10]
-DocumentPath=.\outputs\AwesomePCB.GM32
+DocumentPath=outputs\AwesomePCB.GBO
 DItemRevisionGUID=
 
 [GeneratedDocument11]
-DocumentPath=.\outputs\AwesomePCB.GTL
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument12]
-DocumentPath=.\outputs\AwesomePCB.GTO
+DocumentPath=outputs\AwesomePCB.GBS
 DItemRevisionGUID=
 
 [GeneratedDocument13]
-DocumentPath=.\outputs\AwesomePCB.GTS
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.GD1
 DItemRevisionGUID=
 
 [GeneratedDocument14]
-DocumentPath=outputs\AwesomePCB.html
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.GG1
 DItemRevisionGUID=
 
 [GeneratedDocument15]
-DocumentPath=.\outputs\AwesomePCB.LDP
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.GM32
 DItemRevisionGUID=
 
 [GeneratedDocument16]
-DocumentPath=outputs\AwesomePCB.LDP
+DocumentPath=outputs\AwesomePCB.GM32
 DItemRevisionGUID=
 
 [GeneratedDocument17]
-DocumentPath=.\outputs\AwesomePCB.REP
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.GTL
 DItemRevisionGUID=
 
 [GeneratedDocument18]
-DocumentPath=outputs\AwesomePCB.REP
+DocumentPath=outputs\AwesomePCB.GTL
 DItemRevisionGUID=
 
 [GeneratedDocument19]
-DocumentPath=.\outputs\AwesomePCB.RUL
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.GTO
 DItemRevisionGUID=
 
 [GeneratedDocument20]
-DocumentPath=outputs\AwesomePCB.RUL
+DocumentPath=outputs\AwesomePCB.GTO
 DItemRevisionGUID=
 
 [GeneratedDocument21]
-DocumentPath=.\outputs\AwesomePCB.TXT
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.GTS
 DItemRevisionGUID=
 
 [GeneratedDocument22]
-DocumentPath=outputs\AwesomePCB.TXT
+DocumentPath=outputs\AwesomePCB.GTS
 DItemRevisionGUID=
 
 [GeneratedDocument23]
-DocumentPath=.\outputs\Bill of Materials-AwesomeRemote.csv
+DocumentPath=outputs\AwesomePCB.html
 DItemRevisionGUID=
 
 [GeneratedDocument24]
-DocumentPath=outputs\Bill of Materials-AwesomeRemote.csv
+DocumentPath=.\FabFolder\NC Drill\AwesomePCB.LDP
 DItemRevisionGUID=
 
 [GeneratedDocument25]
-DocumentPath=Project Outputs for PCB_Project\Design Rule Check - AwesomePCB.html
+DocumentPath=outputs\AwesomePCB.LDP
 DItemRevisionGUID=
 
 [GeneratedDocument26]
-DocumentPath=outputs\Pick Place for AwesomePCB.csv
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.REP
 DItemRevisionGUID=
 
 [GeneratedDocument27]
+DocumentPath=outputs\AwesomePCB.REP
+DItemRevisionGUID=
+
+[GeneratedDocument28]
+DocumentPath=.\FabFolder\Gerber\AwesomePCB.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument29]
+DocumentPath=outputs\AwesomePCB.RUL
+DItemRevisionGUID=
+
+[GeneratedDocument30]
+DocumentPath=.\FabFolder\NC Drill\AwesomePCB.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument31]
+DocumentPath=outputs\AwesomePCB.TXT
+DItemRevisionGUID=
+
+[GeneratedDocument32]
+DocumentPath=.\FabFolder\BOM\Bill of Materials-AwesomeRemote.csv
+DItemRevisionGUID=
+
+[GeneratedDocument33]
+DocumentPath=outputs\Bill of Materials-AwesomeRemote.csv
+DItemRevisionGUID=
+
+[GeneratedDocument34]
+DocumentPath=Project Outputs for PCB_Project\Design Rule Check - AwesomePCB.html
+DItemRevisionGUID=
+
+[GeneratedDocument35]
+DocumentPath=outputs\Pick Place for AwesomePCB.csv
+DItemRevisionGUID=
+
+[GeneratedDocument36]
 DocumentPath=outputs\Pick Place for AwesomePCB.txt
 DItemRevisionGUID=
 

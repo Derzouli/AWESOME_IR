@@ -42,8 +42,8 @@ Generating : Bottom Layer
 
 
 Used DCodes :
-    D17
     D18
+    D20
     D22
     D23
     D24
@@ -134,5 +134,34 @@ Generating : Board outlines
 
 Used DCodes :
     D45
+*************************************************************
+
+*************************************************************
+Generating : Drill Drawing
+      File : AwesomePCB.GD1
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Drawing
+
+
+Used DCodes :
+    D18
+    D46
+    D47
+    D48
+*************************************************************
+
+*************************************************************
+Generating : Drill Guide
+      File : AwesomePCB.GG1
+
+    Adding Drill Pair : Top Layer-Bottom Layer
+
+    Adding Layer      : Drill Guide
+
+
+Used DCodes :
+    D49
 *************************************************************
 
