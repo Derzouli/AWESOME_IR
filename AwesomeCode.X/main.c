@@ -11,32 +11,61 @@
 u32 reception[50];
 u8  static_index = 0;
 
+// value for NEC
+// 560 usec
+// 9ms bit de depart
+// 4.5 bits de pause
+
+// bit 1:
+// 560us impulsion
+// 1690us pause
+// bit 0:
+// 560us impulsion
+// 565 pause
 	__attribute__((interrupt(IPL4AUTO), nomips16, vector(_EXTERNAL_2_VECTOR)))
 void			ir_receive(void)
 {
-//	u32 c = 0; u16 tmr_comp = 0; u32 c2 = 0;
+            u32 header;
+            u32 h_down;
+            u32 h_up;
+            u32 i;
+
+        header = 0;
+        i = 0;
+        h_down = 0;
+        IFS0bits.T3IF = 0;
 	TMR2 = 0;
-//	while (TMR2 < 40 * (417 + 278))	// wait header (see freebox_v5 lirc conf files) TODO verify good header
-//		;
-//	while (c < 20 && TMR2 < 4032680) // we want 20 datas bits but during ~100817 microseconds. Else trame is wrong
-//	{
-//		tmr_comp = (TMR2 + 6680) < PR2 ?: PR2; // tmr + 167 microseconds …
-//
-//		while (TMR2 <= tmr_comp || !PORTDbits.RD9) // … wait 167us
-//			;
-//		while (PORTDbits.RD9 && TMR2 < tmr_comp + (40*778)) // second bit part (which give value) represented by delay down
-//			;
-//		reception[c] = TMR2 - tmr_comp; // value
-//		c++;
-//
-//	}
-//	while (c2 <= c) {
-//		uart_putnbr(reception[c2]/40, 10);
-//		uart_putstr("\n\r");
-//		c2++;
-//	}
-//	uart_putstr("\n\r ------------------ \n\r");
-	IFS0bits.INT2IF = 0;
+        LATFbits.LATF1 = 1;
+        while (IFS0bits.T3IF == 0)
+        {
+            if (PORTDbits.RD9 == 0 && TMR2 < 360000) // down 0
+              header |= 1;
+            else if (PORTDbits.RD9 == 1 && TMR2 < 360000 && TMR2 < 539000) // up 0
+              header |= 2;
+            if (PORTDbits.RD9 == 0 && (TMR2 > 540000 && TMR2 < 562400))
+                h_down |= 1;
+            else if (PORTDbits.RD9 == 0 && (TMR2 > 540000 + 22400 && TMR2 < 562400 + 22400))
+                h_down |= 4;
+            else if (PORTDbits.RD9 == 0 && (TMR2 > 540000 + 22400 * 2 && TMR2 < 562400 + 22400 * 2))
+                h_down |= 8;
+            else if (PORTDbits.RD9 == 0 && (TMR2 > 540000 + 22400 * 3 && TMR2 < 562400 + 22400 * 3))
+                h_down |= 16;
+            else if (PORTDbits.RD9 == 0 && (TMR2 > 540000 + 22400 * 4 && TMR2 < 562400 + 22400 * 4))
+                h_down |= 32;
+            else if (PORTDbits.RD9 == 0 && (TMR2 > 540000 + 22400 * 5 && TMR2 < 562400 + 22400 * 5))
+                h_down |= 64;
+            else if (PORTDbits.RD9 == 0 && (TMR2 > 540000 + 22400 * 6 && TMR2 < 562400 + 22400 * 6))
+                h_down |= 128;
+            else if (PORTDbits.RD9 == 0 && (TMR2 > 540000 + 22400 * 7 && TMR2 < 562400 + 22400 * 7))
+                h_down |= 256;
+            else if (PORTDbits.RD9 == 0 && (TMR2 > 540000 + 22400 * 8 && TMR2 < 562400 + 22400 * 8))
+                h_down |= 512;
+        }
+        uart_putstr("\r\n");
+        uart_putnbr(h_down, 10);
+        uart_putstr("\r\n");
+        LATFbits.LATF1 = 0;
+        IFS0bits.INT2IF = 0;
 }
 
 /* Interrupt called each two captured event by Input Capture module.
@@ -62,15 +91,19 @@ int main(void)
         TMR2 = 0;
 	INTCONbits.MVEC = 1;	// multi-vectors mode for interrupt
 
-        IPC2bits.INT2IP = 4; // Set priority for button
-        IPC2bits.INT2IS = 3; // Set subpriority for button
-        IFS0bits.INT2IF = 0; // Clear the int1
-        IEC0bits.INT2IE = 1; // Enable interrupt for button
+        IPC2bits.INT2IP = 4; // Set priority for TSOP
+        IPC2bits.INT2IS = 3; // Set subpriority for TSOP
+        IFS0bits.INT2IF = 0; // Clear the int2
+        IEC0bits.INT2IE = 1; // Enable interrupt for TSOP
 
         //Let the Input Capture configure the timer; if it does it
-//	T2CONbits.T32 = 1;	// timer 2 and 3 as one 32 bits timer (instead of 2 16 bits timers)
-//	PR2 = 4032680 + 40; // timer @40MHz -> 40 clock pulse / microseconds. Tmr period = signal (fixed) length
-//	T2CONbits.ON = 1;
+        T3CONbits.TON = 0; // disable timer 3
+        T2CONbits.TON = 0; // disable timer 2
+        T2CONbits.T32 = 1; // timer 2 and 3 as one 32 bits timer (instead of 2 16 bits timers)
+	PR2 = 40 * 67500; // timer @40MHz -> 40 clock pulse / microseconds. // Tmr period = signal (fixed) length
+        T2CONbits.TON = 1; // enable timer 2
+        IEC0bits.T3IE = 1; // enable timer 1 interrupt
+        IFS0bits.T3IF = 0; // clear timer 1 interrupt
 
         asm("ei");		// enable interrupts
 
