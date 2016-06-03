@@ -26,6 +26,7 @@ Datasheet de la carte PIC32
 
 ##### USB HARMONY FRAMEWORK
 * http://ww1.microchip.com/downloads/en/DeviceDoc/help_harmony_v0_70b.pdf
+
 ##### USB HID report descriptor
 * http://eleccelerator.com/tutorial-about-usb-hid-report-descriptors/
 
