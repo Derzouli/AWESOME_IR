@@ -16,6 +16,11 @@ Datasheet de la carte PIC32
 * http://microchip.wikidot.com/usb:development
 * http://www.beyondlogic.org/usbnutshell/usb5.shtml
 
+
+##### REPORT DESCRIPTOR HID USB
+* Mega important!
+* http://www.usb.org/developers/hidpage/HID1_11.pdf
+
 ##### PIC32 USB STACK
 * http://ww1.microchip.com/downloads/en/AppNotes/01176A.pdf
 * http://events.linuxfoundation.org/sites/events/files/slides/elc_2014_usb_0.pdf
