@@ -10,12 +10,12 @@
             <logicalFolder name="f1" displayName="framework" projectFiles="true">
               <logicalFolder name="f1" displayName="system" projectFiles="true">
                 <logicalFolder name="f1" displayName="clk" projectFiles="true">
-                  <itemPath>..\src\system_config\default\framework\system\clk\sys_clk_static.h</itemPath>
+                  <itemPath>../src/system_config/default/framework/system/clk/sys_clk_static.h</itemPath>
                 </logicalFolder>
               </logicalFolder>
             </logicalFolder>
-            <itemPath>..\src\system_config\default\system_config.h</itemPath>
-            <itemPath>..\src\system_config\default\system_definitions.h</itemPath>
+            <itemPath>../src/system_config/default/system_config.h</itemPath>
+            <itemPath>../src/system_config/default/system_definitions.h</itemPath>
           </logicalFolder>
         </logicalFolder>
         <itemPath>../src/awesome.h</itemPath>
@@ -23,26 +23,26 @@
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="driver" projectFiles="true">
           <logicalFolder name="f1" displayName="tmr" projectFiles="true">
-            <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\driver\tmr\drv_tmr.h</itemPath>
+            <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/driver/tmr/drv_tmr.h</itemPath>
           </logicalFolder>
-          <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\driver\driver.h</itemPath>
+          <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/driver/driver.h</itemPath>
         </logicalFolder>
         <logicalFolder name="f2" displayName="system" projectFiles="true">
           <logicalFolder name="f1" displayName="common" projectFiles="true">
-            <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\common\sys_common.h</itemPath>
-            <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\common\sys_module.h</itemPath>
+            <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/common/sys_common.h</itemPath>
+            <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/common/sys_module.h</itemPath>
           </logicalFolder>
           <logicalFolder name="f2" displayName="devcon" projectFiles="true">
-            <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\devcon\sys_devcon.h</itemPath>
-            <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\devcon\src\sys_devcon_cache.h</itemPath>
+            <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/devcon/sys_devcon.h</itemPath>
+            <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/devcon/src/sys_devcon_cache.h</itemPath>
           </logicalFolder>
           <logicalFolder name="f3" displayName="int" projectFiles="true">
-            <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\int\sys_int.h</itemPath>
+            <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/int/sys_int.h</itemPath>
           </logicalFolder>
           <logicalFolder name="f4" displayName="ports" projectFiles="true">
-            <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\ports\sys_ports.h</itemPath>
+            <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/ports/sys_ports.h</itemPath>
           </logicalFolder>
-          <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\system.h</itemPath>
+          <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/system.h</itemPath>
         </logicalFolder>
       </logicalFolder>
     </logicalFolder>
@@ -60,20 +60,20 @@
               <logicalFolder name="f1" displayName="system" projectFiles="true">
                 <logicalFolder name="f1" displayName="clk" projectFiles="true">
                   <logicalFolder name="f1" displayName="src" projectFiles="true">
-                    <itemPath>..\src\system_config\default\framework\system\clk\src\sys_clk_static.c</itemPath>
+                    <itemPath>../src/system_config/default/framework/system/clk/src/sys_clk_static.c</itemPath>
                   </logicalFolder>
                 </logicalFolder>
                 <logicalFolder name="f2" displayName="ports" projectFiles="true">
                   <logicalFolder name="f1" displayName="src" projectFiles="true">
-                    <itemPath>..\src\system_config\default\framework\system\ports\src\sys_ports_static.c</itemPath>
+                    <itemPath>../src/system_config/default/framework/system/ports/src/sys_ports_static.c</itemPath>
                   </logicalFolder>
                 </logicalFolder>
               </logicalFolder>
             </logicalFolder>
-            <itemPath>..\src\system_config\default\system_init.c</itemPath>
-            <itemPath>..\src\system_config\default\system_interrupt.c</itemPath>
-            <itemPath>..\src\system_config\default\system_exceptions.c</itemPath>
-            <itemPath>..\src\system_config\default\system_tasks.c</itemPath>
+            <itemPath>../src/system_config/default/system_init.c</itemPath>
+            <itemPath>../src/system_config/default/system_interrupt.c</itemPath>
+            <itemPath>../src/system_config/default/system_exceptions.c</itemPath>
+            <itemPath>../src/system_config/default/system_tasks.c</itemPath>
           </logicalFolder>
         </logicalFolder>
         <itemPath>../src/awesome.c</itemPath>
@@ -84,7 +84,7 @@
           <logicalFolder name="f1" displayName="tmr" projectFiles="true">
             <logicalFolder name="f1" displayName="src" projectFiles="true">
               <logicalFolder name="f1" displayName="dynamic" projectFiles="true">
-                <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\driver\tmr\src\dynamic\drv_tmr.c</itemPath>
+                <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/driver/tmr/src/dynamic/drv_tmr.c</itemPath>
               </logicalFolder>
             </logicalFolder>
           </logicalFolder>
@@ -92,19 +92,19 @@
         <logicalFolder name="f2" displayName="system" projectFiles="true">
           <logicalFolder name="f1" displayName="devcon" projectFiles="true">
             <logicalFolder name="f1" displayName="src" projectFiles="true">
-              <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\devcon\src\sys_devcon.c</itemPath>
-              <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\devcon\src\sys_devcon_pic32mz.c</itemPath>
-              <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\devcon\src\sys_devcon_cache_pic32mz.S</itemPath>
+              <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/devcon/src/sys_devcon.c</itemPath>
+              <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/devcon/src/sys_devcon_pic32mz.c</itemPath>
+              <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/devcon/src/sys_devcon_cache_pic32mz.S</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f2" displayName="int" projectFiles="true">
             <logicalFolder name="f1" displayName="src" projectFiles="true">
-              <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\int\src\sys_int_pic32.c</itemPath>
+              <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/int/src/sys_int_pic32.c</itemPath>
             </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f3" displayName="ports" projectFiles="true">
             <logicalFolder name="f1" displayName="src" projectFiles="true">
-              <itemPath>..\..\..\..\..\..\..\microchip\harmony\v1_07_01\framework\system\ports\src\sys_ports.c</itemPath>
+              <itemPath>../../../../../../../microchip/harmony/v1_07_01/framework/system/ports/src/sys_ports.c</itemPath>
             </logicalFolder>
           </logicalFolder>
         </logicalFolder>

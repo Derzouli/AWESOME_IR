@@ -7,36 +7,16 @@
   <Manifest>
     <Files>
       <File>
-        <Name>sys_module.h</Name>
-        <Path>Header Files/framework/system/common</Path>
-      </File>
-      <File>
-        <Name>sys_int.h</Name>
-        <Path>Header Files/framework/system/int</Path>
-      </File>
-      <File>
-        <Name>sys_common.h</Name>
-        <Path>Header Files/framework/system/common</Path>
-      </File>
-      <File>
-        <Name>drv_tmr.h</Name>
-        <Path>Header Files/framework/driver/tmr</Path>
-      </File>
-      <File>
-        <Name>system.h</Name>
-        <Path>Header Files/framework/system</Path>
-      </File>
-      <File>
-        <Name>sys_ports.c</Name>
-        <Path>Source Files/framework/system/ports/src</Path>
+        <Name>driver.h</Name>
+        <Path>Header Files/framework/driver</Path>
       </File>
       <File>
         <Name>sys_devcon_cache_pic32mz.S</Name>
         <Path>Source Files/framework/system/devcon/src</Path>
       </File>
       <File>
-        <Name>driver.h</Name>
-        <Path>Header Files/framework/driver</Path>
+        <Name>sys_module.h</Name>
+        <Path>Header Files/framework/system/common</Path>
       </File>
       <File>
         <Name>sys_devcon.c</Name>
@@ -47,12 +27,32 @@
         <Path>Header Files/framework/system/devcon</Path>
       </File>
       <File>
+        <Name>sys_int.h</Name>
+        <Path>Header Files/framework/system/int</Path>
+      </File>
+      <File>
+        <Name>sys_common.h</Name>
+        <Path>Header Files/framework/system/common</Path>
+      </File>
+      <File>
         <Name>sys_ports.h</Name>
         <Path>Header Files/framework/system/ports</Path>
       </File>
       <File>
+        <Name>drv_tmr.h</Name>
+        <Path>Header Files/framework/driver/tmr</Path>
+      </File>
+      <File>
         <Name>sys_int_pic32.c</Name>
         <Path>Source Files/framework/system/int/src</Path>
+      </File>
+      <File>
+        <Name>sys_ports.c</Name>
+        <Path>Source Files/framework/system/ports/src</Path>
+      </File>
+      <File>
+        <Name>system.h</Name>
+        <Path>Header Files/framework/system</Path>
       </File>
       <File>
         <Name>sys_devcon.h</Name>
@@ -69,13 +69,13 @@
     </Files>
     <Templates>
       <Template>
-        <Name>main.c</Name>
-        <Path>Source Files/app</Path>
-      </Template>
-      <Template>
         <Name>system_exceptions.c</Name>
         <Path>Source Files/app/system_config/default</Path>
         <Checksum>C111969CA43D6CEA1E9E33A6164E7AE0</Checksum>
+      </Template>
+      <Template>
+        <Name>main.c</Name>
+        <Path>Source Files/app</Path>
       </Template>
       <Template>
         <Name>system_config.h</Name>
@@ -97,9 +97,9 @@
         <Checksum>87DC68985D21F0EAE40B2CE0D0422174</Checksum>
       </Template>
       <Template>
-        <Name>system_interrupt.c</Name>
-        <Path>Source Files/app/system_config/default</Path>
-        <Checksum>E26401EC1FDC42B597DB43F1363FB3A9</Checksum>
+        <Name>sys_clk_static.h</Name>
+        <Path>Header Files/app/system_config/default/framework/system/clk</Path>
+        <Checksum>B4BD59D8D7C4DA95DC5E3B57755FD352</Checksum>
       </Template>
       <Template>
         <Name>sys_ports_static.c</Name>
@@ -107,9 +107,9 @@
         <Checksum>6331E482194767407C56C0BD634991F3</Checksum>
       </Template>
       <Template>
-        <Name>sys_clk_static.h</Name>
-        <Path>Header Files/app/system_config/default/framework/system/clk</Path>
-        <Checksum>B4BD59D8D7C4DA95DC5E3B57755FD352</Checksum>
+        <Name>system_interrupt.c</Name>
+        <Path>Source Files/app/system_config/default</Path>
+        <Checksum>E26401EC1FDC42B597DB43F1363FB3A9</Checksum>
       </Template>
       <Template>
         <Name>sys_clk_static.c</Name>

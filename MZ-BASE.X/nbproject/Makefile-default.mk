@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=confbits.c main.c usb/src/usb.c usb/src/usb_hid.c usb_descriptors.c
+SOURCEFILES_QUOTED_IF_SPACED=confbits.c main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/confbits.o ${OBJECTDIR}/main.o ${OBJECTDIR}/usb/src/usb.o ${OBJECTDIR}/usb/src/usb_hid.o ${OBJECTDIR}/usb_descriptors.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/confbits.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/usb/src/usb.o.d ${OBJECTDIR}/usb/src/usb_hid.o.d ${OBJECTDIR}/usb_descriptors.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/confbits.o ${OBJECTDIR}/main.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/confbits.o.d ${OBJECTDIR}/main.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/confbits.o ${OBJECTDIR}/main.o ${OBJECTDIR}/usb/src/usb.o ${OBJECTDIR}/usb/src/usb_hid.o ${OBJECTDIR}/usb_descriptors.o
+OBJECTFILES=${OBJECTDIR}/confbits.o ${OBJECTDIR}/main.o
 
 # Source Files
-SOURCEFILES=confbits.c main.c usb/src/usb.c usb/src/usb_hid.c usb_descriptors.c
+SOURCEFILES=confbits.c main.c
 
 
 CFLAGS=
@@ -98,62 +98,26 @@ ${OBJECTDIR}/confbits.o: confbits.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/confbits.o.d 
 	@${RM} ${OBJECTDIR}/confbits.o 
-	@${FIXDEPS} "${OBJECTDIR}/confbits.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"usb/include" -I"." -MMD -MF "${OBJECTDIR}/confbits.o.d" -o ${OBJECTDIR}/confbits.o confbits.c   
+	@${FIXDEPS} "${OBJECTDIR}/confbits.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/confbits.o.d" -o ${OBJECTDIR}/confbits.o confbits.c   
 	
 ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
-	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"usb/include" -I"." -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c   
-	
-${OBJECTDIR}/usb/src/usb.o: usb/src/usb.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/usb/src" 
-	@${RM} ${OBJECTDIR}/usb/src/usb.o.d 
-	@${RM} ${OBJECTDIR}/usb/src/usb.o 
-	@${FIXDEPS} "${OBJECTDIR}/usb/src/usb.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"usb/include" -I"." -MMD -MF "${OBJECTDIR}/usb/src/usb.o.d" -o ${OBJECTDIR}/usb/src/usb.o usb/src/usb.c   
-	
-${OBJECTDIR}/usb/src/usb_hid.o: usb/src/usb_hid.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/usb/src" 
-	@${RM} ${OBJECTDIR}/usb/src/usb_hid.o.d 
-	@${RM} ${OBJECTDIR}/usb/src/usb_hid.o 
-	@${FIXDEPS} "${OBJECTDIR}/usb/src/usb_hid.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"usb/include" -I"." -MMD -MF "${OBJECTDIR}/usb/src/usb_hid.o.d" -o ${OBJECTDIR}/usb/src/usb_hid.o usb/src/usb_hid.c   
-	
-${OBJECTDIR}/usb_descriptors.o: usb_descriptors.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/usb_descriptors.o.d 
-	@${RM} ${OBJECTDIR}/usb_descriptors.o 
-	@${FIXDEPS} "${OBJECTDIR}/usb_descriptors.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"usb/include" -I"." -MMD -MF "${OBJECTDIR}/usb_descriptors.o.d" -o ${OBJECTDIR}/usb_descriptors.o usb_descriptors.c   
+	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c   
 	
 else
 ${OBJECTDIR}/confbits.o: confbits.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/confbits.o.d 
 	@${RM} ${OBJECTDIR}/confbits.o 
-	@${FIXDEPS} "${OBJECTDIR}/confbits.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"usb/include" -I"." -MMD -MF "${OBJECTDIR}/confbits.o.d" -o ${OBJECTDIR}/confbits.o confbits.c   
+	@${FIXDEPS} "${OBJECTDIR}/confbits.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/confbits.o.d" -o ${OBJECTDIR}/confbits.o confbits.c   
 	
 ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
-	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"usb/include" -I"." -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c   
-	
-${OBJECTDIR}/usb/src/usb.o: usb/src/usb.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/usb/src" 
-	@${RM} ${OBJECTDIR}/usb/src/usb.o.d 
-	@${RM} ${OBJECTDIR}/usb/src/usb.o 
-	@${FIXDEPS} "${OBJECTDIR}/usb/src/usb.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"usb/include" -I"." -MMD -MF "${OBJECTDIR}/usb/src/usb.o.d" -o ${OBJECTDIR}/usb/src/usb.o usb/src/usb.c   
-	
-${OBJECTDIR}/usb/src/usb_hid.o: usb/src/usb_hid.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/usb/src" 
-	@${RM} ${OBJECTDIR}/usb/src/usb_hid.o.d 
-	@${RM} ${OBJECTDIR}/usb/src/usb_hid.o 
-	@${FIXDEPS} "${OBJECTDIR}/usb/src/usb_hid.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"usb/include" -I"." -MMD -MF "${OBJECTDIR}/usb/src/usb_hid.o.d" -o ${OBJECTDIR}/usb/src/usb_hid.o usb/src/usb_hid.c   
-	
-${OBJECTDIR}/usb_descriptors.o: usb_descriptors.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/usb_descriptors.o.d 
-	@${RM} ${OBJECTDIR}/usb_descriptors.o 
-	@${FIXDEPS} "${OBJECTDIR}/usb_descriptors.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -I"usb/include" -I"." -MMD -MF "${OBJECTDIR}/usb_descriptors.o.d" -o ${OBJECTDIR}/usb_descriptors.o usb_descriptors.c   
+	@${FIXDEPS} "${OBJECTDIR}/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/main.o.d" -o ${OBJECTDIR}/main.o main.c   
 	
 endif
 
