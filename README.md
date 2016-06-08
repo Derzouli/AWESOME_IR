@@ -17,6 +17,8 @@ Datasheet de la carte PIC32
 * http://microchip.wikidot.com/usb:development
 * http://www.beyondlogic.org/usbnutshell/usb5.shtml
 
+#### WIKIDOT USB MICROCHIP
+* http://microchip.wikidot.com/harmony:usb-device-hid
 
 ##### REPORT DESCRIPTOR HID USB
 * Mega important!
