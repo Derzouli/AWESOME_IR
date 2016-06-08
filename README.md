@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Derzouli/AWESOME_IR.png?label=ready&title=Ready)](https://waffle.io/Derzouli/AWESOME_IR)
 # AWESOME_IR
 
 ##### POC
