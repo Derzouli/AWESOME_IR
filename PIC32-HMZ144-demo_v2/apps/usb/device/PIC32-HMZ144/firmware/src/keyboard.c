@@ -24,5 +24,3 @@ void KEYBOARD_InputReportCreate
     return;
 
 }
-
-

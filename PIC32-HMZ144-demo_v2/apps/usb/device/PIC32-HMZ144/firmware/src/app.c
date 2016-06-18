@@ -86,6 +86,12 @@ DRV_HANDLE handle;
 MOUSE_REPORT mouseReport APP_MAKE_BUFFER_DMA_READY;
 MOUSE_REPORT mouseReportPrevious APP_MAKE_BUFFER_DMA_READY;
 
+/*Keyboard Report to be transmitted*/
+KEYBOARD_INPUT_REPORT APP_MAKE_BUFFER_DMA_READY keyboardInputReport;
+/* Keyboard output report */
+KEYBOARD_OUTPUT_REPORT APP_MAKE_BUFFER_DMA_READY keyboardOutputReport;
+
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -261,6 +267,46 @@ void APP_USBDeviceEventHandler(USB_DEVICE_EVENT event, void * eventData, uintptr
 // *****************************************************************************
 // *****************************************************************************
 
+/********************************************************
+ * Application Keyboard Emulation Routine
+ ********************************************************/
+
+void APP_EmulateKeyboard(void)
+{
+    bool ok = true;
+    if(ok)
+    {
+        ok = false;
+        /* Clear the switch pressed flag */
+        appData.isSwitchPressed = false;
+
+        /* If the switch was pressed, update the key counter and then
+         * add the key to the keycode array. */
+        appData.key ++;
+
+        if(appData.key == USB_HID_KEYBOARD_KEYPAD_KEYBOARD_RETURN_ENTER)
+        {
+            appData.key = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
+        }
+
+        appData.keyCodeArray.keyCode[0] = appData.key;
+
+        /* Start a switch press ignore counter */
+    }
+    else
+    {
+        ok = true;
+        /* Indicate no event */
+
+         appData.keyCodeArray.keyCode[0] =
+                 USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
+    }
+
+    KEYBOARD_InputReportCreate(&appData.keyCodeArray,
+            &appData.keyboardModifierKeys, &keyboardInputReport);
+
+}
+
 void Delay (volatile unsigned long int Time)
 {
     while (Time--);
@@ -344,6 +390,7 @@ void APP_Initialize ( void )
     appData.emulateMouse = true;
     appData.hidInstance = 0;
     appData.isMouseReportSendBusy = false;
+    appData.isReportSentComplete = false;
     appData.isSwitchPressed = false;
     appData.ignoreSwitchPress = false;
 
@@ -373,11 +420,6 @@ void APP_Tasks ( void )
     /* Check the application's current state. */
     switch ( appData.state )
     {
-        /* Application's initial state. */
-        case APP_STATE_INIT:
-            appData.state = APP_STATE_INIT_USB;
-
-
         /* Application's initial state. */
         case APP_STATE_INIT_USB:
         {
@@ -409,10 +451,46 @@ void APP_Tasks ( void )
 
             if(appData.isConfigured)
             {
-                appData.state = APP_STATE_MOUSE_EMULATE;
+                appData.state = APP_STATE_KBD_EMULATE;
             }
             break;
 
+        case APP_STATE_CHECK_IF_CONFIGURED:
+
+            /* This state is needed because the device can get
+             * unconfigured asynchronously. Any application state
+             * machine reset should happen within the state machine
+             * context only. */
+
+            if(appData.isConfigured)
+            {
+                appData.state = APP_STATE_KBD_EMULATE;
+            }
+            else
+            {
+                /* This means the device got de-configured.
+                 * We reset the state and the wait for configuration */
+
+                appData.state = APP_STATE_WAIT_FOR_CONFIGURATION;
+            }
+            break;
+
+        case APP_STATE_KBD_EMULATE:
+            if(appData.isReportSentComplete)
+            {
+                /* This means report can be sent*/
+
+                APP_EmulateKeyboard();
+
+                appData.isReportSentComplete = false;
+                USB_DEVICE_HID_ReportSend(appData.hidInstance,
+                    &appData.sendTransferHandle,
+                    (uint8_t *)&keyboardInputReport,
+                    sizeof(KEYBOARD_INPUT_REPORT));
+             }
+
+            appData.state = APP_STATE_CHECK_IF_CONFIGURED;
+            break;
         case APP_STATE_MOUSE_EMULATE:
 
             APP_ProcessSwitchPress();

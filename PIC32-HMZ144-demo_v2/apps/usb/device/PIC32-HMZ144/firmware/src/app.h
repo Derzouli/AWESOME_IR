@@ -60,6 +60,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "system_config.h"
 #include "system_definitions.h"
 #include "mouse.h"
+#include "keyboard.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -94,7 +95,10 @@ typedef enum
 
 	/* Application waits for configuration in this state */
     APP_STATE_WAIT_FOR_CONFIGURATION,
+            
+            APP_STATE_CHECK_IF_CONFIGURED,
 
+            APP_STATE_KBD_EMULATE,
     /* Application runs mouse emulation in this state */
     APP_STATE_MOUSE_EMULATE,
 
@@ -165,6 +169,18 @@ typedef struct
     /* USB HID current Idle */
     uint8_t idleRate;
 
+    /* Track the send report status */
+    bool isReportSentComplete;
+
+    /* Track if a report was received */
+    bool isReportReceived;
+
+     /* Receive transfer handle */
+    USB_DEVICE_HID_TRANSFER_HANDLE receiveTransferHandle;
+
+    /* Send transfer handle */
+    USB_DEVICE_HID_TRANSFER_HANDLE sendTransferHandle;
+    
     /* Tracks the progress of the report send */
     bool isMouseReportSendBusy;
 
@@ -173,7 +189,16 @@ typedef struct
 
     /* Switch debounce timer */
     unsigned int switchDebounceTimer;
+    
+    /* Keycode to be sent */
+    USB_HID_KEYBOARD_KEYPAD key;
 
+    /* Keyboard modifier keys*/
+    KEYBOARD_MODIFIER_KEYS keyboardModifierKeys;
+
+    /* Key code array*/
+    KEYBOARD_KEYCODE_ARRAY keyCodeArray;
+    
     /* SET IDLE timer */
     uint16_t setIdleTimer;
 
