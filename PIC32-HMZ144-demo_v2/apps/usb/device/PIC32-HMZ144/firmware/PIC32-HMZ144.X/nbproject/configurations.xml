@@ -22,6 +22,7 @@
         </logicalFolder>
         <itemPath>../src/app.h</itemPath>
         <itemPath>../src/mouse.h</itemPath>
+        <itemPath>../../../../../../framework/system/devcon/src/keyboard.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="bsp" projectFiles="true">
         <logicalFolder name="f1" displayName="pic32mz_ec_sk" projectFiles="true">
@@ -133,6 +134,7 @@
         <itemPath>../src/app.c</itemPath>
         <itemPath>../src/main.c</itemPath>
         <itemPath>../src/mouse.c</itemPath>
+        <itemPath>../../../../../../framework/system/devcon/src/keyboard.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="bsp" projectFiles="true">
         <logicalFolder name="f1" displayName="pic32mz_ec_sk" projectFiles="true">
@@ -274,7 +276,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>XC32</languageToolchain>
-        <languageToolchainVersion>1.40</languageToolchainVersion>
+        <languageToolchainVersion>1.34</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <compileType>
@@ -458,6 +460,9 @@
         <property key="save-temps" value="false"/>
         <property key="wpo-lto" value="false"/>
       </C32Global>
+      <ICD3PlatformTool>
+        <property key="firmware.download.all" value="false"/>
+      </ICD3PlatformTool>
       <PICkit3PlatformTool>
         <property key="AutoSelectMemRanges" value="auto"/>
         <property key="CHANGE NOTICE A" value="true"/>
