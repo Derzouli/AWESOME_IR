@@ -111,12 +111,11 @@ void APP_USBDeviceHIDEventHandler(USB_DEVICE_HID_INDEX hidInstance,
             /* This means the mouse report was sent.
              We are free to send another report */
 
-            appData->isMouseReportSendBusy = false;
+            appData->isReportSentComplete = true;
             break;
 
         case USB_DEVICE_HID_EVENT_REPORT_RECEIVED:
 
-            /* Dont care for other event in this demo */
             break;
 
         case USB_DEVICE_HID_EVENT_SET_IDLE:
@@ -206,9 +205,7 @@ void APP_USBDeviceEventHandler(USB_DEVICE_EVENT event, void * eventData, uintptr
             /* Device got deconfigured */
             
             appData.isConfigured = false;
-            appData.isMouseReportSendBusy = false;
             appData.state = APP_STATE_WAIT_FOR_CONFIGURATION;
-            appData.emulateMouse = true;
             BSP_LEDOn ( APP_USB_LED_1 );
             BSP_LEDOn ( APP_USB_LED_2 );
             BSP_LEDOff ( APP_USB_LED_3 );
@@ -222,7 +219,7 @@ void APP_USBDeviceEventHandler(USB_DEVICE_EVENT event, void * eventData, uintptr
             if(configurationValue->configurationValue == 1)
             {
                 appData.isConfigured = true;
-                
+
                 BSP_LEDOff ( APP_USB_LED_1 );
                 BSP_LEDOff ( APP_USB_LED_2 );
                 BSP_LEDOn ( APP_USB_LED_3 );
@@ -266,46 +263,6 @@ void APP_USBDeviceEventHandler(USB_DEVICE_EVENT event, void * eventData, uintptr
 // Section: Application Local Functions
 // *****************************************************************************
 // *****************************************************************************
-
-/********************************************************
- * Application Keyboard Emulation Routine
- ********************************************************/
-
-void APP_EmulateKeyboard(void)
-{
-    bool ok = true;
-    if(ok)
-    {
-        ok = false;
-        /* Clear the switch pressed flag */
-        appData.isSwitchPressed = false;
-
-        /* If the switch was pressed, update the key counter and then
-         * add the key to the keycode array. */
-        appData.key ++;
-
-        if(appData.key == USB_HID_KEYBOARD_KEYPAD_KEYBOARD_RETURN_ENTER)
-        {
-            appData.key = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
-        }
-
-        appData.keyCodeArray.keyCode[0] = appData.key;
-
-        /* Start a switch press ignore counter */
-    }
-    else
-    {
-        ok = true;
-        /* Indicate no event */
-
-         appData.keyCodeArray.keyCode[0] =
-                 USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
-    }
-
-    KEYBOARD_InputReportCreate(&appData.keyCodeArray,
-            &appData.keyboardModifierKeys, &keyboardInputReport);
-
-}
 
 void Delay (volatile unsigned long int Time)
 {
@@ -384,16 +341,25 @@ void APP_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
     appData.state = APP_STATE_INIT_USB;
-
     appData.deviceHandle  = USB_DEVICE_HANDLE_INVALID;
     appData.isConfigured = false;
-    appData.emulateMouse = true;
     appData.hidInstance = 0;
-    appData.isMouseReportSendBusy = false;
-    appData.isReportSentComplete = false;
+    appData.isReportSentComplete = true;
     appData.isSwitchPressed = false;
     appData.ignoreSwitchPress = false;
+    /* Initialize tracking variables */
+    appData.isReportSentComplete = true;
+        /* Initialize the keycode array */
+    appData.key = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
+    appData.keyCodeArray.keyCode[0] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
+    appData.keyCodeArray.keyCode[1] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
+    appData.keyCodeArray.keyCode[2] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
+    appData.keyCodeArray.keyCode[3] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
+    appData.keyCodeArray.keyCode[4] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
+    appData.keyCodeArray.keyCode[5] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
 
+    /* Initialize the modifier keys */
+    appData.keyboardModifierKeys.modifierkeys = 0;
     // Write Protect pin must be constant 0 since there is no such pin in our board
     TRISFbits.TRISF1 = 0;
     LATFbits.LATF1 = 0;
@@ -410,13 +376,6 @@ void APP_Initialize ( void )
 
 void APP_Tasks ( void )
 {
-    static int8_t   vector = 0;
-    static uint8_t  movement_length = 0;
-    static bool     sent_dont_move = false;
-
-    int8_t dir_table[] ={-4,-4,-4, 0, 4, 4, 4, 0};
-
-
     /* Check the application's current state. */
     switch ( appData.state )
     {
@@ -478,9 +437,19 @@ void APP_Tasks ( void )
         case APP_STATE_KBD_EMULATE:
             if(appData.isReportSentComplete)
             {
-                /* This means report can be sent*/
+                appData.key ++;
 
-                APP_EmulateKeyboard();
+                if(appData.key == USB_HID_KEYBOARD_KEYPAD_KEYBOARD_RETURN_ENTER)
+                {
+                    appData.key = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
+                }
+
+                appData.keyCodeArray.keyCode[0] = appData.key;
+
+
+                KEYBOARD_InputReportCreate(&appData.keyCodeArray,
+                    &appData.keyboardModifierKeys, &keyboardInputReport);
+
 
                 appData.isReportSentComplete = false;
                 USB_DEVICE_HID_ReportSend(appData.hidInstance,
@@ -490,63 +459,6 @@ void APP_Tasks ( void )
              }
 
             appData.state = APP_STATE_CHECK_IF_CONFIGURED;
-            break;
-        case APP_STATE_MOUSE_EMULATE:
-
-            APP_ProcessSwitchPress();
-
-            /* The following logic rotates the mouse icon when
-             * a switch is pressed */
-
-            if (!BSP_SwitchStateGet (BSP_SWITCH_1)) // rotate the mouse ONLY if the button is pressed
-            {
-                if(appData.emulateMouse)
-                {
-                    sent_dont_move = false;
-
-                    if(movement_length > 14)
-                    {
-                        appData.mouseButton[0] = MOUSE_BUTTON_STATE_RELEASED;
-                        appData.mouseButton[1] = MOUSE_BUTTON_STATE_RELEASED;
-                        appData.xCoordinate =(int8_t)dir_table[vector & 0x07] ;
-                        appData.yCoordinate =(int8_t)dir_table[(vector+2) & 0x07];
-                        vector ++;
-                        movement_length = 0;
-                    }
-                }
-                else
-                {
-                    appData.mouseButton[0] = MOUSE_BUTTON_STATE_RELEASED;
-                    appData.mouseButton[1] = MOUSE_BUTTON_STATE_RELEASED;
-                    appData.xCoordinate = 0;
-                    appData.yCoordinate = 0;
-
-                }
-
-                if(!appData.isMouseReportSendBusy)
-                {
-                    if(((sent_dont_move == false) && (!appData.emulateMouse)) || (appData.emulateMouse))
-                    {
-                        /* This means we can send the mouse report. The
-                           isMouseReportBusy flag is updated in the HID Event Handler. */
-
-                        appData.isMouseReportSendBusy = true;
-
-                        /* Create the mouse report */
-
-                        MOUSE_ReportCreate(appData.xCoordinate, appData.yCoordinate,
-                                appData.mouseButton, &mouseReport);
-
-                        /* Send the mouse report. */
-                        USB_DEVICE_HID_ReportSend(appData.hidInstance,
-                                &appData.reportTransferHandle, (uint8_t*)&mouseReport,
-                                sizeof(MOUSE_REPORT));
-
-                        movement_length ++;
-                        sent_dont_move = true;
-                    }
-                }
-            }
             break;
 
         /* The default state should never be executed. */

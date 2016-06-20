@@ -123,13 +123,6 @@ typedef struct
     /* Application's current state */
     APP_STATES state;
 
-    /* Application data buffer */
-    uint8_t data[1024];
-
-    uint32_t nBytesWritten;
-
-    uint32_t nBytesRead;
-
     /* device layer handle returned by device layer open function */
     USB_DEVICE_HANDLE  deviceHandle;
 
@@ -157,9 +150,6 @@ typedef struct
     /* HID instance associated with this app object*/
     SYS_MODULE_INDEX hidInstance;
 
-    /* Transfer handle */
-    USB_DEVICE_HID_TRANSFER_HANDLE reportTransferHandle;
-
     /* Device Layer System Module Object */
     SYS_MODULE_OBJ deviceLayerObject;
 
@@ -172,17 +162,8 @@ typedef struct
     /* Track the send report status */
     bool isReportSentComplete;
 
-    /* Track if a report was received */
-    bool isReportReceived;
-
-     /* Receive transfer handle */
-    USB_DEVICE_HID_TRANSFER_HANDLE receiveTransferHandle;
-
     /* Send transfer handle */
     USB_DEVICE_HID_TRANSFER_HANDLE sendTransferHandle;
-    
-    /* Tracks the progress of the report send */
-    bool isMouseReportSendBusy;
 
     /* Flag determines SOF event has occured */
     bool sofEventHasOccurred;
@@ -198,7 +179,7 @@ typedef struct
 
     /* Key code array*/
     KEYBOARD_KEYCODE_ARRAY keyCodeArray;
-    
+
     /* SET IDLE timer */
     uint16_t setIdleTimer;
 
