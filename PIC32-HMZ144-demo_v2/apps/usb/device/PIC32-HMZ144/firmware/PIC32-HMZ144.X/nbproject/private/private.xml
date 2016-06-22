@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?><project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/C:/Users/bocal/Desktop/aw2/PIC32-HMZ144-demo_v2/apps/usb/device/PIC32-HMZ144/firmware/src/app.c</file>
+        <file>file:/C:/Users/bocal/Desktop/aw2/PIC32-HMZ144-demo_v2/framework/usb/usb_hid.h</file>
+        <file>file:/C:/Users/bocal/Desktop/aw2/PIC32-HMZ144-demo_v2/framework/usb/src/dynamic/usb_device.c</file>
+        <file>file:/C:/Users/bocal/Desktop/aw2/PIC32-HMZ144-demo_v2/framework/driver/usb/usbhs/src/dynamic/drv_usbhs.c</file>
+        <file>file:/C:/Users/bocal/Desktop/aw2/PIC32-HMZ144-demo_v2/framework/peripheral/spi/processor/spi_p32mz2048ecg144.h</file>
+        <file>file:/C:/Users/bocal/Desktop/aw2/PIC32-HMZ144-demo_v2/apps/usb/device/PIC32-HMZ144/firmware/src/system_config/pic32mz_ec_sk_int_dyn/system_init.c</file>
+        <file>file:/C:/Users/bocal/Desktop/aw2/PIC32-HMZ144-demo_v2/apps/usb/device/PIC32-HMZ144/firmware/src/keyboard.c</file>
+    </open-files>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
     </open-files>

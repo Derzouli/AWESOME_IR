@@ -82,10 +82,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 APP_DATA __attribute__ ((coherent, aligned(4))) appData;
 DRV_HANDLE handle;
 
-/* Mouse Report */
-MOUSE_REPORT mouseReport APP_MAKE_BUFFER_DMA_READY;
-MOUSE_REPORT mouseReportPrevious APP_MAKE_BUFFER_DMA_READY;
-
 /*Keyboard Report to be transmitted*/
 KEYBOARD_INPUT_REPORT APP_MAKE_BUFFER_DMA_READY keyboardInputReport;
 /* Keyboard output report */
@@ -110,7 +106,6 @@ void APP_USBDeviceHIDEventHandler(USB_DEVICE_HID_INDEX hidInstance,
 
             /* This means the mouse report was sent.
              We are free to send another report */
-
             appData->isReportSentComplete = true;
             break;
 
@@ -349,12 +344,12 @@ void APP_Initialize ( void )
     appData.ignoreSwitchPress = false;
         /* Initialize the keycode array */
     appData.key = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
-    appData.keyCodeArray.keyCode[0] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
-    appData.keyCodeArray.keyCode[1] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
-    appData.keyCodeArray.keyCode[2] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
-    appData.keyCodeArray.keyCode[3] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
-    appData.keyCodeArray.keyCode[4] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
-    appData.keyCodeArray.keyCode[5] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
+    appData.keyCodeArray.keyCode[0] = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
+    appData.keyCodeArray.keyCode[1] = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
+    appData.keyCodeArray.keyCode[2] = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
+    appData.keyCodeArray.keyCode[3] = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
+    appData.keyCodeArray.keyCode[4] = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
+    appData.keyCodeArray.keyCode[5] = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
 
     /* Initialize the modifier keys */
     appData.keyboardModifierKeys.modifierkeys = 0;
@@ -421,7 +416,7 @@ void APP_Tasks ( void )
 
             if(appData.isConfigured)
             {
-                appData.state = APP_STATE_KBD_EMULATE;
+               // appData.state = APP_STATE_KBD_EMULATE;
             }
             else
             {
@@ -433,11 +428,17 @@ void APP_Tasks ( void )
             break;
 
         case APP_STATE_KBD_EMULATE:
+            APP_ProcessSwitchPress();
 
             if(appData.isReportSentComplete)
             {
-                if (!PORTBbits.RB12)
+                if(appData.isSwitchPressed)
                 {
+                    /* Clear the switch pressed flag */
+                    appData.isSwitchPressed = false;
+
+                    /* If the switch was pressed, update the key counter and then
+                     * add the key to the keycode array. */
                     appData.key ++;
 
                     if(appData.key == USB_HID_KEYBOARD_KEYPAD_KEYBOARD_RETURN_ENTER)
@@ -447,17 +448,23 @@ void APP_Tasks ( void )
 
                     appData.keyCodeArray.keyCode[0] = appData.key;
 
+                    /* Start a switch press ignore counter */
+                }
+                else
+                {
+                    /* Indicate no event */
 
+                     appData.keyCodeArray.keyCode[0] =
+                             USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
+                }
                     KEYBOARD_InputReportCreate(&appData.keyCodeArray,
                         &appData.keyboardModifierKeys, &keyboardInputReport);
-
-
-                    appData.isReportSentComplete = false;
+                    
                     USB_DEVICE_HID_ReportSend(appData.hidInstance,
                         &appData.sendTransferHandle,
                         (uint8_t *)&keyboardInputReport,
                         sizeof(KEYBOARD_INPUT_REPORT));
-                 }
+                    appData.isReportSentComplete = false;
             }
 
             appData.state = APP_STATE_CHECK_IF_CONFIGURED;
