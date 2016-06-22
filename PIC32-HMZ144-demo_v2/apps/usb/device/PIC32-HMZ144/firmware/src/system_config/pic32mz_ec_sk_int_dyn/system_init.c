@@ -203,7 +203,7 @@ const USB_DEVICE_FUNCTION_REGISTRATION_TABLE funcRegistrationTable[1] =
     { 
         .configurationValue = 1,    /* Configuration value */ 
         .interfaceNumber = 0,       /* First interfaceNumber of this function */ 
-        .speed = USB_SPEED_HIGH|USB_SPEED_FULL,    /* Function Speed */ 
+        .speed = USB_SPEED_FULL,    /* Function Speed */
         .numberOfInterfaces = 1,    /* Number of interfaces */
         .funcDriverIndex = 0,  /* Index of HID Function Driver */
         .driver = (void*)USB_DEVICE_HID_FUNCTION_DRIVER,    /* USB HID function data exposed to device layer */
@@ -338,8 +338,8 @@ const uint8_t fullSpeedConfigurationDescriptor[]=
     0x00,                                               // Configuration string index
     USB_ATTRIBUTE_DEFAULT | USB_ATTRIBUTE_SELF_POWERED, // Attributes
     50,                                                 // Max power consumption (2X mA)
-    /* Descriptor for Function 1 - HID     */ 
-    
+    /* Descriptor for Function 1 - HID     */
+
 	/* Interface Descriptor */
 
     0x09,                               // Size of this descriptor in bytes
@@ -379,8 +379,8 @@ const uint8_t fullSpeedConfigurationDescriptor[]=
     USB_TRANSFER_TYPE_INTERRUPT,    // Attributes
     0x40,0x00,                      // size
     0x01,                           // Interval
-    
-    
+
+
 
 
 };
@@ -464,13 +464,13 @@ const USB_DEVICE_MASTER_DESCRIPTOR usbMasterDescriptor =
     &deviceDescriptor,          /* Full speed descriptor */
     1,                          /* Total number of full speed configurations available */
     fullSpeedConfigDescSet,     /* Pointer to array of full speed configurations descriptors*/
-    &deviceDescriptor,          /* High speed device descriptor*/
-    1,                          /* Total number of high speed configurations available */
-    highSpeedConfigDescSet,     /* Pointer to array of high speed configurations descriptors. */
+    NULL,//&deviceDescriptor,          /* High speed device descriptor*/
+    0,                          /* Total number of high speed configurations available */
+    NULL,//highSpeedConfigDescSet,     /* Pointer to array of high speed configurations descriptors. */
     3,                          // Total number of string descriptors available.
     stringDescriptors,          // Pointer to array of string descriptors.
     &deviceQualifierDescriptor1,// Pointer to full speed dev qualifier.
-    &deviceQualifierDescriptor1 // Pointer to high speed dev qualifier.
+    NULL //&deviceQualifierDescriptor1 // Pointer to high speed dev qualifier.
 };
 
 
@@ -493,7 +493,7 @@ const USB_DEVICE_INIT usbDevInitData =
     .usbMasterDescriptor = (USB_DEVICE_MASTER_DESCRIPTOR*)&usbMasterDescriptor,
 
     /* USB Device Speed */
-    .deviceSpeed = USB_SPEED_HIGH,
+    .deviceSpeed = USB_SPEED_FULL,
     
     /* Index of the USB Driver to be used by this Device Layer Instance */
     .driverIndex = DRV_USBHS_INDEX_0,
@@ -617,7 +617,7 @@ const DRV_USBHS_INIT drvUSBInit =
     
     .operationMode = DRV_USBHS_OPMODE_DEVICE,
 
-    .operationSpeed = USB_SPEED_HIGH,
+    .operationSpeed = USB_SPEED_FULL,
     
     /* Stop in idle */
     .stopInIdle = false,

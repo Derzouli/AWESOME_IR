@@ -347,8 +347,6 @@ void APP_Initialize ( void )
     appData.isReportSentComplete = true;
     appData.isSwitchPressed = false;
     appData.ignoreSwitchPress = false;
-    /* Initialize tracking variables */
-    appData.isReportSentComplete = true;
         /* Initialize the keycode array */
     appData.key = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
     appData.keyCodeArray.keyCode[0] = USB_HID_KEYBOARD_KEYPAD_RESERVED_NO_EVENT_INDICATED;
@@ -435,28 +433,32 @@ void APP_Tasks ( void )
             break;
 
         case APP_STATE_KBD_EMULATE:
+
             if(appData.isReportSentComplete)
             {
-                appData.key ++;
-
-                if(appData.key == USB_HID_KEYBOARD_KEYPAD_KEYBOARD_RETURN_ENTER)
+                if (!PORTBbits.RB12)
                 {
-                    appData.key = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
-                }
+                    appData.key ++;
 
-                appData.keyCodeArray.keyCode[0] = appData.key;
+                    if(appData.key == USB_HID_KEYBOARD_KEYPAD_KEYBOARD_RETURN_ENTER)
+                    {
+                        appData.key = USB_HID_KEYBOARD_KEYPAD_KEYBOARD_A;
+                    }
+
+                    appData.keyCodeArray.keyCode[0] = appData.key;
 
 
-                KEYBOARD_InputReportCreate(&appData.keyCodeArray,
-                    &appData.keyboardModifierKeys, &keyboardInputReport);
+                    KEYBOARD_InputReportCreate(&appData.keyCodeArray,
+                        &appData.keyboardModifierKeys, &keyboardInputReport);
 
 
-                appData.isReportSentComplete = false;
-                USB_DEVICE_HID_ReportSend(appData.hidInstance,
-                    &appData.sendTransferHandle,
-                    (uint8_t *)&keyboardInputReport,
-                    sizeof(KEYBOARD_INPUT_REPORT));
-             }
+                    appData.isReportSentComplete = false;
+                    USB_DEVICE_HID_ReportSend(appData.hidInstance,
+                        &appData.sendTransferHandle,
+                        (uint8_t *)&keyboardInputReport,
+                        sizeof(KEYBOARD_INPUT_REPORT));
+                 }
+            }
 
             appData.state = APP_STATE_CHECK_IF_CONFIGURED;
             break;
