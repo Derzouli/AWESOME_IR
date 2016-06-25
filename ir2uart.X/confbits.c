@@ -14,13 +14,13 @@
 
 // DEVCFG2
 #pragma config FPLLIDIV = DIV_1         // PLL Input Divider (1x Divider)
-#pragma config FPLLMUL = MUL_16         // PLL Multiplier (16x Multiplier)
+#pragma config FPLLMUL = MUL_20         // PLL Multiplier (20x Multiplier)
 #pragma config UPLLIDIV = DIV_1         // USB PLL Input Divider (1x Divider)
 #pragma config UPLLEN = OFF             // USB PLL Enable (Disabled and Bypassed)
-#pragma config FPLLODIV = DIV_8         // System PLL Output Clock Divider (PLL Divide by 8)
+#pragma config FPLLODIV = DIV_2         // System PLL Output Clock Divider (PLL Divide by 2)
 
 // DEVCFG1
-#pragma config FNOSC = PRI              // Oscillator Selection Bits (Primary Osc (XT,HS,EC))
+#pragma config FNOSC = PRIPLL           // Oscillator Selection Bits (Primary Osc w/PLL (XT+,HS+,EC+PLL))
 #pragma config FSOSCEN = OFF            // Secondary Oscillator Enable (Disabled)
 #pragma config IESO = ON                // Internal/External Switch Over (Enabled)
 #pragma config POSCMOD = XT             // Primary Oscillator Configuration (XT osc mode)

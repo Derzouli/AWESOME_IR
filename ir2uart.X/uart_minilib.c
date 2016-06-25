@@ -49,7 +49,7 @@ void uart_putchar(u8 c)
 {
 	while (U2STAbits.UTXBF)
 		;
-	U1TXREG = c;
+	U2TXREG = c;
 	while (!U2STAbits.TRMT)
 		;
 }
