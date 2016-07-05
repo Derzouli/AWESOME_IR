@@ -25,6 +25,7 @@ void        trame_check(void)
     IEC0bits.INT0IE = 1;
     IFS0bits.T3IF = 0;
 }
+
 __attribute__((interrupt(IPL3AUTO), nomips16, vector(_EXTERNAL_0_VECTOR)))
 void        ir_receive(void)
 {
@@ -35,14 +36,13 @@ void        ir_receive(void)
 }
 
 
-
-
 int main(void)
 {
 #ifdef USB_USE_INTERRUPTS
-    IPC7bits.USBIP = 7; /* Interrupt priority, must set to != 0. */
+    IPC7bits.USBIP = 2; /* Interrupt priority, must set to != 0. */
 #endif
     init();
+    uart_putstr("Device initialized\n\rInit USB...\n\r");
     usb_init();
 
     int8_t key_press = 4;
@@ -58,33 +58,13 @@ int main(void)
     }
     unsigned char *buf = NULL;
     bool send = false;
+
     while (1)
     {
-        if (usb_is_configured() &&
-            !usb_in_endpoint_halted(1) &&
-                !usb_in_endpoint_busy(1))
-        {
-            buf = usb_get_in_buffer(1);
-
-            buf[0] = 0;
-            buf[1] = 0;
-            buf[2] = send ? key_press : 0;
-            buf[3] = 0;
-            buf[4] = 0;
-            buf[5] = 0;
-            buf[6] = 0;
-            buf[7] = 0;
-
-            if (send)
-                usb_send_in_buffer(1, 8);
-
-            send = false;
-        }
         if ((trame = analyze_trame(&reception)))
         {
             send = true;
-            uart_putnbr(trame == REPEAT ? prev_trame : trame, 2);
-            uart_putstr("\n\r");
+
             if (trame != REPEAT && trame != ERROR)
                 prev_trame = trame;
             switch (trame == REPEAT ? prev_trame : trame)
@@ -103,8 +83,29 @@ int main(void)
                     break;
                 default:
                     uart_putendl("Key not recognized");
+                    key_press = 0;
                     send = false;
             }
+        }
+
+        if (usb_is_configured() &&
+            !usb_in_endpoint_halted(1) &&
+                !usb_in_endpoint_busy(1))
+        {
+            buf = usb_get_in_buffer(1);
+
+            buf[0] = 0;
+            buf[1] = 0;
+            buf[2] = send ? key_press : 0;
+            buf[3] = 0;
+            buf[4] = 0;
+            buf[5] = 0;
+            buf[6] = 0;
+            buf[7] = 0;
+
+            usb_send_in_buffer(1, 8);
+
+            send = false;
         }
 
         #ifndef USB_USE_INTERRUPTS
@@ -148,27 +149,27 @@ void app_out_transaction_callback(uint8_t endpoint)
 
 void app_in_transaction_complete_callback(uint8_t endpoint)
 {
-    static bool send = true;
-    unsigned char *buf = NULL;
-
-    if (send)
-    {
-        buf = usb_get_in_buffer(1);
-
-        buf[0] = 0;
-        buf[1] = 0;
-        buf[2] = 0;
-        buf[3] = 0;
-        buf[4] = 0;
-        buf[5] = 0;
-        buf[6] = 0;
-        buf[7] = 0;
-
-        usb_send_in_buffer(1, 8);
-        send = false;
-    }
-    else
-        send = true;
+//    static bool send = false;
+//    unsigned char *buf = NULL;
+//
+//    if (send)
+//    {
+//        buf = usb_get_in_buffer(1);
+//
+//        buf[0] = 0;
+//        buf[1] = 0;
+//        buf[2] = 0;
+//        buf[3] = 0;
+//        buf[4] = 0;
+//        buf[5] = 0;
+//        buf[6] = 0;
+//        buf[7] = 0;
+//
+//        usb_send_in_buffer(1, 8);
+//        send = false;
+//    }
+//    else
+//        send = true;
 
 }
 
@@ -248,7 +249,8 @@ uint8_t app_get_idle_callback(uint8_t interface, uint8_t report_id)
 int8_t app_set_idle_callback(uint8_t interface, uint8_t report_id,
                              uint8_t idle_rate)
 {
-	return -1;
+    idle_rate = 500;
+    return 0;
 }
 
 int8_t app_get_protocol_callback(uint8_t interface)

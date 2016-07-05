@@ -40,5 +40,4 @@ void init(void)
 
 
     LATBbits.LATB10 = 1;
-    uart_putstr("Device initialized\n\rInit USB...\n\r");
 }
