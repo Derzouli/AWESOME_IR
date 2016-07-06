@@ -3,6 +3,7 @@
 # define FCTS_H
 
 #define _SUPPRESS_PLIB_WARNING
+#define _DISABLE_OPENADC10_CONFIGPORT_WARNING
 
 # include <p32xxxx.h>
 # include <plib.h>
@@ -22,7 +23,7 @@ void	uart_putstr(u8 *str);
 void    uart_putchar(u8 c);
 void    uart_putnbr(u32 nbr, u8 base);
 void    uart_putendl(u8 *str);
-int     analyze_trame(volatile u32 (*reception)[10][35]);
+u32     analyze_trame(volatile u32 (*reception)[10][35]);
 
 #define K_UP	0b111111111010101001010101
 #define K_RIGHT	0b111111110100101010110101
@@ -40,6 +41,5 @@ int     analyze_trame(volatile u32 (*reception)[10][35]);
 #define K_8	0b111111111010000001011111
 #define K_9	0b111111111000000001111111
 #define K_0	0b111111110010000011011111
-
 
 #endif

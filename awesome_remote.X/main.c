@@ -1,5 +1,3 @@
-
-
 #include "usb.h"
 #include <xc.h>
 #include <string.h>
@@ -8,7 +6,7 @@
 #include "usb_hid.h"
 #include "fcts.h"
 
-volatile u32 reception[10][35];
+volatile u32 g_reception[10][35];
 volatile u32 c = 0;
 volatile s8 d = 0;
 
@@ -17,7 +15,7 @@ void        trame_check(void)
 {
     IEC0bits.INT0IE = 0;
     T2CONbits.TON = 0; // disable timer 2
-    reception[d][34] = c;
+    g_reception[d][34] = c;
     d = (d < 10) ? d + 1 : 0;
     c = 0;
     TMR2 = 0;
@@ -30,62 +28,47 @@ __attribute__((interrupt(IPL3AUTO), nomips16, vector(_EXTERNAL_0_VECTOR)))
 void        ir_receive(void)
 {
     T2CONbits.TON = 1; // enable timer 2
-    reception[d][c] = TMR2;
+    g_reception[d][c] = TMR2;
     c++;
     IFS0bits.INT0IF = 0;
 }
-
 
 int main(void)
 {
 #ifdef USB_USE_INTERRUPTS
     IPC7bits.USBIP = 2; /* Interrupt priority, must set to != 0. */
 #endif
-    init();
+    // init ( sys_clk_speed , uart_transfert_speed )
+    init(40000000, 9600);
     uart_putstr("Device initialized\n\rInit USB...\n\r");
     usb_init();
 
-    int8_t key_press = 4;
-
     u8 a = 0, i = 0;
-    u32 trame = 0, prev_trame = 0;
-
-    while (a < 10)
-    {
-        while (i < 35)
-            reception[a][i++] = 0;
-        ++a;
-    }
+    u8 key_press = 4;
     unsigned char *buf = NULL;
     bool send = false;
 
+    u32 trame = 0, prev_trame = 0;
+
+    // equivalent ? 
+    // memset(reception, 0, 350);
+    while (a < 10)
+    {
+        while (i < 35)
+            g_reception[a][i++] = 0;
+        ++a;
+    }
+
     while (1)
     {
-        if ((trame = analyze_trame(&reception)))
+        if ((trame = analyze_trame(&g_reception)))
         {
             send = true;
 
-            if (trame != REPEAT && trame != ERROR)
+            if (trame != REPEAT)
                 prev_trame = trame;
-            switch (trame == REPEAT ? prev_trame : trame)
-            {
-                case K_RIGHT:
-                    key_press = 79;
-                    break;
-                case K_LEFT:
-                    key_press = 80;
-                    break;
-                case K_DOWN:
-                    key_press = 81;
-                    break;
-                case K_UP:
-                    key_press = 82;
-                    break;
-                default:
-                    uart_putendl("Key not recognized");
-                    key_press = 0;
-                    send = false;
-            }
+            key_press = trame_to_keycode(trame == REPEAT ? prev_trame : trame);
+            trame = 0;
         }
 
         if (usb_is_configured() &&
@@ -149,28 +132,8 @@ void app_out_transaction_callback(uint8_t endpoint)
 
 void app_in_transaction_complete_callback(uint8_t endpoint)
 {
-//    static bool send = false;
-//    unsigned char *buf = NULL;
-//
-//    if (send)
-//    {
-//        buf = usb_get_in_buffer(1);
-//
-//        buf[0] = 0;
-//        buf[1] = 0;
-//        buf[2] = 0;
-//        buf[3] = 0;
-//        buf[4] = 0;
-//        buf[5] = 0;
-//        buf[6] = 0;
-//        buf[7] = 0;
-//
-//        usb_send_in_buffer(1, 8);
-//        send = false;
-//    }
-//    else
-//        send = true;
-
+    if (endpoint == 1)
+        LATBbits.LATB3 = 1;
 }
 
 int8_t app_unknown_setup_request_callback(const struct setup_packet *setup)
@@ -249,7 +212,6 @@ uint8_t app_get_idle_callback(uint8_t interface, uint8_t report_id)
 int8_t app_set_idle_callback(uint8_t interface, uint8_t report_id,
                              uint8_t idle_rate)
 {
-    idle_rate = 500;
     return 0;
 }
 

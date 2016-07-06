@@ -1,8 +1,8 @@
 #include "fcts.h"
 
-void init(void)
+void init(u32 clk_speed, u32 uart_speed)
 {
-    SYSTEMConfigPerformance(40000000);
+    SYSTEMConfigPerformance(clk_speed);
     asm("di");
     SYSKEY = 0xAA996655;
     SYSKEY = 0x556699AA;
@@ -11,7 +11,7 @@ void init(void)
     SYSKEY = 0x33333333;
     asm("ei");
 
-    uart_init(9600, 40000000);
+    uart_init(uart_speed, clk_speed);
     INTCONbits.MVEC = 1; // multi-vectors mode for interrupt
 
     IPC0bits.INT0IP = 3; // Set priority for TSOP
@@ -37,7 +37,4 @@ void init(void)
     TRISBbits.TRISB3 = 0;
     _nop();
     __asm("ei");
-
-
-    LATBbits.LATB10 = 1;
 }
