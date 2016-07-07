@@ -485,8 +485,8 @@ static void reset_ep0_data_stage()
 	 */
 }
 
-#define SERIAL(x)  uart_putendl(x)
-#define SERIAL_VAL(x) uart_putnbr(x)
+#define SERIAL(x)
+#define SERIAL_VAL(x)
 
 /* Initialize or reset all of the endpoints. This is done:
  *   1. at startup,

@@ -9,7 +9,6 @@ void init(u32 clk_speed, u32 uart_speed)
     RPB0Rbits.RPB0R = 2; // pin select for UART TX
     OSCCONbits.UFRCEN = 0;
     SYSKEY = 0x33333333;
-    asm("ei");
 
     uart_init(uart_speed, clk_speed);
     INTCONbits.MVEC = 1; // multi-vectors mode for interrupt

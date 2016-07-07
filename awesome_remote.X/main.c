@@ -42,23 +42,17 @@ int main(void)
     init(40000000, 9600);
     uart_putstr("Device initialized\n\rInit USB...\n\r");
     usb_init();
+    asm("ei");
 
     u8 a = 0, i = 0;
     u8 key_press = 4;
-    unsigned char *buf = NULL;
+    u8 *buf = NULL;
     bool send = false;
 
     u32 trame = 0, prev_trame = 0;
 
-    // equivalent ? 
-    // memset(reception, 0, 350);
-    while (a < 10)
-    {
-        while (i < 35)
-            g_reception[a][i++] = 0;
-        ++a;
-    }
-
+    memset(g_reception, 0, 350);
+ 
     while (1)
     {
         if ((trame = analyze_trame(&g_reception)))
@@ -67,7 +61,10 @@ int main(void)
 
             if (trame != REPEAT)
                 prev_trame = trame;
-            key_press = trame_to_keycode(trame == REPEAT ? prev_trame : trame);
+            if (trame == ERROR)
+                key_press = 0;
+            else
+                key_press = trame_to_keycode(trame == REPEAT ? prev_trame : trame);
             trame = 0;
         }
 
@@ -112,7 +109,10 @@ uint16_t app_get_device_status_callback()
 
 void app_endpoint_halt_callback(uint8_t endpoint, bool halted)
 {
-
+        uart_putstr("HALTED = ");
+        uart_putnbr(halted, 2);
+        uart_putstr("on endpoint ");
+        uart_putnbr(endpoint, 10);
 }
 
 int8_t app_set_interface_callback(uint8_t interface, uint8_t alt_setting)
@@ -132,8 +132,29 @@ void app_out_transaction_callback(uint8_t endpoint)
 
 void app_in_transaction_complete_callback(uint8_t endpoint)
 {
+    u8 *buf = NULL;
+    static bool send = true;
+
     if (endpoint == 1)
-        LATBbits.LATB3 = 1;
+    {
+        LATBbits.LATB3 = 0;
+        if (send)
+        {
+            buf = usb_get_in_buffer(1);
+            buf[0] = 0;
+            buf[1] = 0;
+            buf[2] = 0;
+            buf[3] = 0;
+            buf[4] = 0;
+            buf[5] = 0;
+            buf[6] = 0;
+            buf[7] = 0;
+            usb_send_in_buffer(1, 8);
+            send = false;
+        }
+        else
+            send = true;
+    }
 }
 
 int8_t app_unknown_setup_request_callback(const struct setup_packet *setup)
@@ -212,7 +233,7 @@ uint8_t app_get_idle_callback(uint8_t interface, uint8_t report_id)
 int8_t app_set_idle_callback(uint8_t interface, uint8_t report_id,
                              uint8_t idle_rate)
 {
-    return 0;
+    return -1;
 }
 
 int8_t app_get_protocol_callback(uint8_t interface)

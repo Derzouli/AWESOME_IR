@@ -93,38 +93,74 @@ const ROMPTR struct device_descriptor this_device_descriptor =
  * is the mouse example from the "HID Descriptor Tool" which can be downloaded
  * from USB.org. */
 static const ROMPTR uint8_t keyboard_report_descriptor[] = {
-    0x05, 0x01, // USAGE_PAGE (Generic Desktop)
-    0x09, 0x06, // USAGE (Keyboard)
-    0xa1, 0x01, // COLLECTION (Application)
-    0x05, 0x07, // USAGE_PAGE (Keyboard)
-    0x19, 0xe0, // USAGE_MINIMUM (Keyboard LeftControl)
-    0x29, 0xe7, // USAGE_MAXIMUM (Keyboard Right GUI)
-    0x15, 0x00, // LOGICAL_MINIMUM (0)
-    0x25, 0x01, // LOGICAL_MAXIMUM (1)
-    0x75, 0x01, // REPORT_SIZE (1)
-    0x95, 0x08, // REPORT_COUNT (8)
-    0x81, 0x02, // INPUT (Data,Var,Abs)
-    0x95, 0x01, // REPORT_COUNT (1)
-    0x75, 0x08, // REPORT_SIZE (8)
-    0x81, 0x03, // INPUT (Cnst,Var,Abs)
-    0x95, 0x05, // REPORT_COUNT (5)
-    0x75, 0x01, // REPORT_SIZE (1)
-    0x05, 0x08, // USAGE_PAGE (LEDs)
-    0x19, 0x01, // USAGE_MINIMUM (Num Lock)
-    0x29, 0x05, // USAGE_MAXIMUM (Kana)
-    0x91, 0x02, // OUTPUT (Data,Var,Abs)
-    0x95, 0x01, // REPORT_COUNT (1)
-    0x75, 0x03, // REPORT_SIZE (3)
-    0x91, 0x03, // OUTPUT (Cnst,Var,Abs)
-    0x95, 0x06, // REPORT_COUNT (6)
-    0x75, 0x08, // REPORT_SIZE (8)
-    0x15, 0x00, // LOGICAL_MINIMUM (0)
-    0x25, 0x65, // LOGICAL_MAXIMUM (101)
-    0x05, 0x07, // USAGE_PAGE (Keyboard)
-    0x19, 0x00, // USAGE_MINIMUM (Reserved (no event indicated))
-    0x29, 0x65, // USAGE_MAXIMUM (Keyboard Application)
-    0x81, 0x00, // INPUT (Data,Ary,Abs)
-    0xc0        // End Collection
+ //   0x05, 0x01, // USAGE_PAGE (Generic Desktop)
+ //   0x09, 0x06, // USAGE (Keyboard)
+   
+ //   0xa1, 0x01, // COLLECTION (Application)
+ //   0x05, 0x07, //      USAGE_PAGE (Key Codes)
+ //   0x19, 0xe0, //      USAGE_MINIMUM (Keyboard LeftControl)
+ //   0x29, 0xe7, //      USAGE_MAXIMUM (Keyboard Right GUI)
+ //   0x15, 0x00, //      LOGICAL_MINIMUM (0)
+ //   0x25, 0x01, //      LOGICAL_MAXIMUM (1)
+ //   0x75, 0x01, //      REPORT_SIZE (1)
+ //   0x95, 0x08, //      REPORT_COUNT (8)
+ //   0x81, 0x02, //      INPUT (Data,Var,Abs)
+ //   0x95, 0x01, //      REPORT_COUNT (1)
+ //   0x75, 0x08, //      REPORT_SIZE (8)
+ //   0x81, 0x03, //      INPUT (Constant)
+ //   0x95, 0x05, //      REPORT_COUNT (5)
+ //   0x75, 0x01, //      REPORT_SIZE (1)
+
+ //   0x05, 0x08, //      USAGE_PAGE (LEDs)
+ //   0x19, 0x01, //      USAGE_MINIMUM (Num Lock)
+ //   0x29, 0x05, //      USAGE_MAXIMUM (Kana)
+ //   0x91, 0x02, //      OUTPUT (Data,Var,Abs)
+ //   0x95, 0x01, //      REPORT_COUNT (1)
+ //   0x75, 0x03, //      REPORT_SIZE (3)
+ //   0x91, 0x03, //      OUTPUT (Cnst,Var,Abs)
+ //   0x95, 0x06, //      REPORT_COUNT (6)
+ //   0x75, 0x08, //      REPORT_SIZE (8)
+ //   0x15, 0x00, //      LOGICAL_MINIMUM (0)
+ //   0x25, 0x65, //      LOGICAL_MAXIMUM (101)
+
+ //   0x05, 0x07, //      USAGE_PAGE (Key Codes)
+ //   0x19, 0x00, //      USAGE_MINIMUM (Reserved (no event indicated))
+ //   0x29, 0x65, //      USAGE_MAXIMUM (Keyboard Application)
+ //   0x81, 0x00, //      INPUT (Data, Array) ; key arrays (6 bytes)
+ //   0xc0        // End Collection
+111111111111111111111111111111111111111111111111111111111111222222233333333333333333333333666666666666666666666666666
+/*  USAGE_PAGE (Generic Desktop)                            */      0x05, 0x01,
+/*  USAGE (Keyboard)                                        */      0x09, 0x06,
+/*  COLLECTION (Application)                                */      0xA1, 0x01,
+/*        USAGE_PAGE (Keyboard)                             */      0x05, 0x07,
+/*        USAGE_MINIMUM (Keyboard LeftControl)              */      0x19, 0xE0,
+/*        USAGE_MAXIMUM (Keyboard Right GUI)                */      0x29, 0xE7,
+/*        LOGICAL_MINIMUM (0)                               */      0x15, 0x00,
+/*        LOGICAL_MAXIMUM (1)                               */      0x25, 0x01,
+/*        REPORT_SIZE (1)                                   */      0x75, 0x01,
+/*        REPORT_COUNT (8)                                  */      0x95, 0x08,
+/*        INPUT (Data,Var,Abs)                              */      0x81, 0x02,
+/*        REPORT_COUNT (1)                                  */      0x95, 0x01,
+/*        REPORT_SIZE (8)                                   */      0x75, 0x08,
+/*        INPUT (Cnst,Var,Abs)                              */      0x81, 0x03,
+/*        REPORT_COUNT (5)                                  */      0x95, 0x05,
+/*        REPORT_SIZE (1)                                   */      0x75, 0x01,
+/*        USAGE_PAGE (LEDs)                                 */      0x05, 0x08,
+/*        USAGE_MINIMUM (Num Lock)                          */      0x19, 0x01,
+/*        USAGE_MAXIMUM (Kana)                              */      0x29, 0x05,
+/*        OUTPUT (Data,Var,Abs)                             */      0x91, 0x02,
+/*        REPORT_COUNT (1)                                  */      0x95, 0x01,
+/*        REPORT_SIZE (3)                                   */      0x75, 0x03,
+/*        OUTPUT (Cnst,Var,Abs)                             */      0x91, 0x03,
+/*        REPORT_COUNT (6)                                  */      0x95, 0x06,
+/*        REPORT_SIZE (8)                                   */      0x75, 0x08,
+/*        LOGICAL_MINIMUM (0)                               */      0x15, 0x00,
+/*        LOGICAL_MAXIMUM (101)                             */      0x25, 0x65,
+/*        USAGE_PAGE (Keyboard)                             */      0x05, 0x07,
+/*        USAGE_MINIMUM (Reserved (no event indicated))     */      0x19, 0x00,
+/*        USAGE_MAXIMUM (Keyboard Application)              */      0x29, 0x65,
+/*        INPUT (Data,Ary,Abs)                              */      0x81, 0x00,
+/*  END_COLLECTION                                          */      0xC0,
 };
 
 /* Configuration Packet Instance
@@ -147,7 +183,7 @@ static const ROMPTR struct configuration_1_packet configuration_1 =
 	1, // bConfigurationValue
 	2, // iConfiguration (index of string descriptor)
 	0b10000000,
-	50,   // 100/2 indicates 100mA
+	0x32,   // 100/2 = 32 indicates 100mA
 	},
 
 	{
@@ -156,7 +192,7 @@ static const ROMPTR struct configuration_1_packet configuration_1 =
 	DESC_INTERFACE,
 	0x0, // InterfaceNumber
 	0x0, // AlternateSetting
-	0x2, // bNumEndpoints (num besides endpoint 0)
+	0x1, // bNumEndpoints (num besides endpoint 0)
 	HID_INTERFACE_CLASS, // bInterfaceClass 3=HID, 0xFF=VendorDefined
 	0x00, // bInterfaceSubclass (0=NoBootInterface for HID)
 	0x00, // bInterfaceProtocol
@@ -184,15 +220,16 @@ static const ROMPTR struct configuration_1_packet configuration_1 =
 	1, // bInterval in ms.
 	},
 
-	{
-	// Members of the Endpoint Descriptor (EP1 OUT)
-	sizeof(struct endpoint_descriptor),
-	DESC_ENDPOINT,
-	0x01 /*| 0x00*/, // endpoint #1 0x00=OUT
-	EP_INTERRUPT, // bmAttributes
-	EP_1_OUT_LEN, // wMaxPacketSize
-	1, // bInterval in ms.
-	},
+//	{
+//	// Members of the Endpoint Descriptor (EP1 OUT)
+//	sizeof(struct endpoint_descriptor),
+//	DESC_ENDPOINT,
+//	0x01 /*| 0x00*/, // endpoint #1 0x00=OUT
+//	EP_INTERRUPT, // bmAttributes
+//	EP_1_OUT_LEN, // wMaxPacketSize
+//	1, // bInterval in ms.
+//	},
+
 };
 
 /* String Descriptors
