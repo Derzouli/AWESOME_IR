@@ -59,6 +59,7 @@ int main(void)
         {
             if ((trame = analyze_trame(&g_reception)))
             {
+                send = true;
                 if (trame != REPEAT)
                 {
                     prev_trame = trame;
@@ -73,14 +74,16 @@ int main(void)
                     trame = repeat_trame(prev_trame);
                     if (trame != 0)
                     {
+                        uart_putstr("AAAAAAAAAAAAAAAAAAAAAAA");
                         key_press = 42;
-                        prev_trame = trame;b1bca111
+                        prev_trame = trame;
                     }
                     else
+                    {
                         key_press = trame_to_keycode(prev_trame);
+                    }
                 }
-                send = true;
-             }
+            }
         }
         else
         {
