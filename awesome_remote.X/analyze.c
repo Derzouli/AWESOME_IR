@@ -67,52 +67,52 @@ u8 trame_to_keycode(u32 trame)
     switch (trame)
     {
         case POWER_KEY: // reboot
-            uart_putstr("REBOOT\n\r");
             SYSKEY = 0xAA996655;
             SYSKEY = 0x556699AA;
+            __asm("nop");
             RSWRSTbits.SWRST = 1;
             break;
         case K_RIGHT:
-            key_press = 79;
+            key_press = 0x4F;
             break;
         case K_LEFT:
-            key_press = 80;
+            key_press = 0x50;
             break;
         case K_DOWN:
-            key_press = 81;
+            key_press = 0x51;
             break;
         case K_UP:
-            key_press = 82;
+            key_press = 0x52;
             break;
         case K_1:
-            key_press = 30;
+            key_press = 0x1E;
             break;
         case K_2:
-            key_press = 31;
+            key_press = 0x1F;
             break;
         case K_3:
-            key_press = 32;
+            key_press = 0x20;
             break;
         case K_4:
-            key_press = 33;
+            key_press = 0x21;
             break;
         case K_5:
-            key_press = 34;
+            key_press = 0x22;
             break;
         case K_6:
-            key_press = 35;
+            key_press = 0x23;
             break;
         case K_7:
-            key_press = 36;
+            key_press = 0x24;
             break;
         case K_8:
-            key_press = 37;
+            key_press = 0x25;
             break;
         case K_9:
-            key_press = 38;
+            key_press = 0x26;
             break;
         case K_0:
-            key_press = 39;
+            key_press = 0x27;
             break;
         case K_A:
             key_press = 0x04;
@@ -196,25 +196,25 @@ u8 trame_to_keycode(u32 trame)
             key_press = 0x2A;
             break;
         case K_V_UP:
-            key_press = 128;
+            key_press = 0x80;
             break;
         case K_V_DOWN:
-            key_press = 129;
+            key_press = 0x81;
             break;
         case K_HELP:
-            key_press = 117;
+            key_press = 0x75;
             break;
         case K_PAGE_UP:
-            key_press = 75;
+            key_press = 0x4B;
             break;
         case K_PAGE_DOWN:
-            key_press = 78;
+            key_press = 0x4E;
             break;
         case K_OK:
-            key_press = 88;
+            key_press = 0x58;
             break;
         case K_PAUSE:
-            key_press = 0x48;
+            key_press = 0xB0;
             break;
         default:
             uart_putstr("Unmapped key : ");

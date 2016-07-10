@@ -7,6 +7,7 @@
 
 # include <p32xxxx.h>
 # include <plib.h>
+# include <string.h>
 
 # define ERROR      2
 # define REPEAT     1
@@ -36,6 +37,7 @@ u32     analyze_trame(volatile u32 (*reception)[30][35]);
 #define K_PAGE_DOWN 0b111111110010101011010101
 #define K_OK	0b111111110110101010010101
 #define K_PAUSE 0b111111111001001001101101
+#define K_NEXT 0b111111110001101011100101
 
 #define K_DEL   0b111111110000000011111111
 

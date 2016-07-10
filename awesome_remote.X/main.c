@@ -9,6 +9,7 @@
 volatile u32 g_reception[30][35];
 volatile u32 c = 0;
 volatile s8 d = 0;
+volatile bool pause = false;
 
 __attribute__((interrupt(IPL4AUTO), nomips16, vector(_TIMER_3_VECTOR)))
 void        trame_check(void)
@@ -74,7 +75,7 @@ int main(void)
                     trame = repeat_trame(prev_trame);
                     if (trame != 0)
                     {
-                        uart_putstr("AAAAAAAAAAAAAAAAAAAAAAA");
+                        //uart_putstr("AAAAAAAAAAAAAAAAAAAAAAA");
                         key_press = 42;
                         prev_trame = trame;
                     }
@@ -92,22 +93,33 @@ int main(void)
                 trame = 0;
         }
 
+
         if (send && usb_is_configured() &&
             !usb_in_endpoint_halted(1) &&
                 !usb_in_endpoint_busy(1))
         {
             buf = usb_get_in_buffer(1);
-            buf[0] = 0;
-            buf[1] = 0;
-            buf[2] = send ? key_press : 0;
-            buf[3] = 0;
-            buf[4] = 0;
-            buf[5] = 0;
-            buf[6] = 0;
-            buf[7] = 0;
-
-            usb_send_in_buffer(1, 8);
-
+            if (key_press == 0xB0)
+            {
+                buf[0] = 0x02;
+                buf[1] = 0b1000;
+                pause = true;
+                usb_send_in_buffer(1, 2);
+            }
+            else
+            {
+                buf[0] = 0x01;
+                buf[1] = 0;
+                buf[2] = 0;
+                buf[3] = key_press;
+                buf[4] = 0;
+                buf[5] = 0;
+                buf[6] = 0;
+                buf[7] = 0;
+                buf[8] = 0;
+                usb_send_in_buffer(1, 9);
+                key_press = 0;
+            }
             send = false;
         }
 
@@ -164,15 +176,27 @@ void app_in_transaction_complete_callback(uint8_t endpoint)
         if (send)
         {
             buf = usb_get_in_buffer(1);
-            buf[0] = 0;
-            buf[1] = 0;
-            buf[2] = 0;
-            buf[3] = 0;
-            buf[4] = 0;
-            buf[5] = 0;
-            buf[6] = 0;
-            buf[7] = 0;
-            usb_send_in_buffer(1, 8);
+            if (buf[0] & 0x01)
+            {
+                buf[0] = 0x01;
+                buf[1] = 0;
+                buf[2] = 0;
+                buf[3] = 0;
+                buf[4] = 0;
+                buf[5] = 0;
+                buf[6] = 0;
+                buf[7] = 0;
+                buf[8] = 0;
+                usb_send_in_buffer(1, 9);
+            }
+
+            if (pause)
+            {
+              buf[0] = 0x02;
+              buf[1] = 0;
+              usb_send_in_buffer(1, 2);
+              pause = false;
+            }
             send = false;
         }
         else
@@ -202,6 +226,7 @@ void app_start_of_frame_callback(void)
 {
 
 }
+
 void app_usb_reset_callback(void)
 {
     memset(g_reception, 0, 1050);
@@ -209,7 +234,7 @@ void app_usb_reset_callback(void)
 
 /* HID Callbacks. See usb_hid.h for documentation. */
 
-static uint8_t report_buf[8];
+static uint8_t report_buf[9];
 
 static void get_report_callback(bool transfer_ok, void *context)
 {
