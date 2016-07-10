@@ -91,8 +91,8 @@ int main(void)
                 key_press = trame_to_keycode(trame);
                 trame = 0;
         }
-        
-        if (usb_is_configured() &&
+
+        if (send && usb_is_configured() &&
             !usb_in_endpoint_halted(1) &&
                 !usb_in_endpoint_busy(1))
         {
@@ -202,10 +202,9 @@ void app_start_of_frame_callback(void)
 {
 
 }
-
 void app_usb_reset_callback(void)
 {
-
+    memset(g_reception, 0, 1050);
 }
 
 /* HID Callbacks. See usb_hid.h for documentation. */

@@ -66,6 +66,12 @@ u8 trame_to_keycode(u32 trame)
 
     switch (trame)
     {
+        case POWER_KEY: // reboot
+            uart_putstr("REBOOT\n\r");
+            SYSKEY = 0xAA996655;
+            SYSKEY = 0x556699AA;
+            RSWRSTbits.SWRST = 1;
+            break;
         case K_RIGHT:
             key_press = 79;
             break;
@@ -188,6 +194,31 @@ u8 trame_to_keycode(u32 trame)
             break;
         case K_DEL:
             key_press = 0x2A;
+            break;
+        case K_V_UP:
+            key_press = 128;
+            break;
+        case K_V_DOWN:
+            key_press = 129;
+            break;
+        case K_HELP:
+            key_press = 117;
+            break;
+        case K_PAGE_UP:
+            key_press = 75;
+            break;
+        case K_PAGE_DOWN:
+            key_press = 78;
+            break;
+        case K_OK:
+            key_press = 88;
+            break;
+        case K_PAUSE:
+            key_press = 0x48;
+            break;
+        default:
+            uart_putstr("Unmapped key : ");
+            uart_putnbrnl(trame, 2);
             break;
     }
     return (key_press);

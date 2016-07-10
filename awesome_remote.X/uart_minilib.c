@@ -51,6 +51,12 @@ void uart_putendl(u8 *str)
     uart_putstr("\n\r");
 }
 
+void uart_putnbrnl(u32 nbr, u8 base)
+{
+    uart_putnbr(nbr, base);
+    uart_putstr("\n\r");
+}
+
 void uart_putchar(u8 c)
 {
 	while (U2STAbits.UTXBF)
