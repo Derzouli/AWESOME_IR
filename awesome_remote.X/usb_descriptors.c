@@ -128,7 +128,7 @@ static const ROMPTR uint8_t keyboard_report_descriptor[] = {
  //   0x29, 0x65, //      USAGE_MAXIMUM (Keyboard Application)
  //   0x81, 0x00, //      INPUT (Data, Array) ; key arrays (6 bytes)
  //   0xc0        // End Collection
-111111111111111111111111111111111111111111111111111111111111222222233333333333333333333333666666666666666666666666666
+
 /*  USAGE_PAGE (Generic Desktop)                            */      0x05, 0x01,
 /*  USAGE (Keyboard)                                        */      0x09, 0x06,
 /*  COLLECTION (Application)                                */      0xA1, 0x01,

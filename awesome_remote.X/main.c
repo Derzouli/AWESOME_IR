@@ -6,7 +6,7 @@
 #include "usb_hid.h"
 #include "fcts.h"
 
-volatile u32 g_reception[10][35];
+volatile u32 g_reception[30][35];
 volatile u32 c = 0;
 volatile s8 d = 0;
 
@@ -14,9 +14,9 @@ __attribute__((interrupt(IPL4AUTO), nomips16, vector(_TIMER_3_VECTOR)))
 void        trame_check(void)
 {
     IEC0bits.INT0IE = 0;
-    T2CONbits.TON = 0; // disable timer 2
+    T2CONbits.TON = 0; // disable timer
     g_reception[d][34] = c;
-    d = (d < 10) ? d + 1 : 0;
+    d = (d < 30) ? d + 1 : 0;
     c = 0;
     TMR2 = 0;
     TMR3 = 0;
@@ -36,7 +36,7 @@ void        ir_receive(void)
 int main(void)
 {
 #ifdef USB_USE_INTERRUPTS
-    IPC7bits.USBIP = 2; /* Interrupt priority, must set to != 0. */
+    IPC7bits.USBIP = 7; /* Interrupt priority, must set to != 0. */
 #endif
     // init ( sys_clk_speed , uart_transfert_speed )
     init(40000000, 9600);
@@ -45,35 +45,55 @@ int main(void)
     asm("ei");
 
     u8 a = 0, i = 0;
-    u8 key_press = 4;
+    u8 key_press = 0;
     u8 *buf = NULL;
     bool send = false;
 
-    u32 trame = 0, prev_trame = 0;
+    volatile u32 trame = 0, prev_trame = 0;
 
-    memset(g_reception, 0, 350);
- 
+    memset(g_reception, 0, 1050);
+
     while (1)
     {
-        if ((trame = analyze_trame(&g_reception)))
+        if (trame == 0)
         {
-            send = true;
-
-            if (trame != REPEAT)
-                prev_trame = trame;
-            if (trame == ERROR)
-                key_press = 0;
-            else
-                key_press = trame_to_keycode(trame == REPEAT ? prev_trame : trame);
-            trame = 0;
+            if ((trame = analyze_trame(&g_reception)))
+            {
+                if (trame != REPEAT)
+                {
+                    prev_trame = trame;
+                    if (trame == ERROR)
+                        key_press = 0;
+                    else
+                        key_press = trame_to_keycode(trame);
+                    trame = 0;
+                }
+                else
+                {
+                    trame = repeat_trame(prev_trame);
+                    if (trame != 0)
+                    {
+                        key_press = 42;
+                        prev_trame = trame;b1bca111
+                    }
+                    else
+                        key_press = trame_to_keycode(prev_trame);
+                }
+                send = true;
+             }
         }
-
+        else
+        {
+                send = true;
+                key_press = trame_to_keycode(trame);
+                trame = 0;
+        }
+        
         if (usb_is_configured() &&
             !usb_in_endpoint_halted(1) &&
                 !usb_in_endpoint_busy(1))
         {
             buf = usb_get_in_buffer(1);
-
             buf[0] = 0;
             buf[1] = 0;
             buf[2] = send ? key_press : 0;
