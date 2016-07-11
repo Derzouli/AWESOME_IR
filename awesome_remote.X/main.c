@@ -40,7 +40,7 @@ int main(void)
 #endif
     // init ( sys_clk_speed , uart_transfert_speed )
     init(40000000, 9600);
-    uart_putstr("Device initialized\n\rInit USB...\n\r");
+    //uart_putstr("Device initialized\n\rInit USB...\n\r");
     usb_init();
     asm("ei");
 
@@ -74,7 +74,7 @@ int main(void)
                     if (trame != 0)
                     {
                         key_press = 42;
-                        prev_trame = trame;b1bca111
+                        prev_trame = trame;
                     }
                     else
                         key_press = trame_to_keycode(prev_trame);
@@ -89,7 +89,7 @@ int main(void)
                 trame = 0;
         }
         
-        if (usb_is_configured() &&
+        if (send && usb_is_configured() &&
             !usb_in_endpoint_halted(1) &&
                 !usb_in_endpoint_busy(1))
         {
@@ -129,10 +129,10 @@ uint16_t app_get_device_status_callback()
 
 void app_endpoint_halt_callback(uint8_t endpoint, bool halted)
 {
-        uart_putstr("HALTED = ");
-        uart_putnbr(halted, 2);
-        uart_putstr("on endpoint ");
-        uart_putnbr(endpoint, 10);
+        //uart_putstr("HALTED = ");
+        //uart_putnbr(halted, 2);
+        //uart_putstr("on endpoint ");
+        //uart_putnbr(endpoint, 10);
 }
 
 int8_t app_set_interface_callback(uint8_t interface, uint8_t alt_setting)

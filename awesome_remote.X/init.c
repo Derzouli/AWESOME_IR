@@ -10,6 +10,9 @@ void init(u32 clk_speed, u32 uart_speed)
     OSCCONbits.UFRCEN = 0;
     SYSKEY = 0x33333333;
 
+    LATBbits.LATB1 = 0;
+    TRISBbits.TRISB1 = 0;
+
     uart_init(uart_speed, clk_speed);
     INTCONbits.MVEC = 1; // multi-vectors mode for interrupt
 
