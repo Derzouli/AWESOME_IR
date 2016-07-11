@@ -5,11 +5,15 @@
 #include "usb_ch9.h"
 #include "usb_hid.h"
 #include "fcts.h"
+#include "usb_cdc.h"
 
 volatile u32 g_reception[30][35];
 volatile u32 c = 0;
 volatile s8 d = 0;
 volatile bool pause = false;
+volatile bool next = false;
+volatile bool prev = false;
+volatile bool stop = false;
 
 __attribute__((interrupt(IPL4AUTO), nomips16, vector(_TIMER_3_VECTOR)))
 void        trame_check(void)
@@ -75,7 +79,7 @@ int main(void)
                     trame = repeat_trame(prev_trame);
                     if (trame != 0)
                     {
-                        //uart_putstr("AAAAAAAAAAAAAAAAAAAAAAA");
+                        uart_putstr("AAAAAAAAAAAAAAAAAAAAAAA");
                         key_press = 42;
                         prev_trame = trame;
                     }
@@ -93,18 +97,45 @@ int main(void)
                 trame = 0;
         }
 
-
         if (send && usb_is_configured() &&
             !usb_in_endpoint_halted(1) &&
                 !usb_in_endpoint_busy(1))
         {
             buf = usb_get_in_buffer(1);
-            if (key_press == 0xB0)
+            if (key_press == 0xCD) // play/pause
             {
                 buf[0] = 0x02;
                 buf[1] = 0b1000;
                 pause = true;
                 usb_send_in_buffer(1, 2);
+            }
+            else if (key_press == 0xB5) // next
+            {
+                buf[0] = 0x02;
+                buf[1] = 0b1;
+                next = true;
+                usb_send_in_buffer(1, 2);
+            }
+            else if (key_press == 0xB6) // prev
+            {
+                buf[0] = 0x02;
+                buf[1] = 0b10;
+                prev = true;
+                usb_send_in_buffer(1, 2);
+            }
+            else if (key_press == 0xB7) // stop
+            {
+                buf[0] = 0x01;
+                buf[1] = 0;
+                buf[2] = 0;
+                buf[3] = 0x04;
+                buf[4] = 0;
+                buf[5] = 0;
+                buf[6] = 0;
+                buf[7] = 0;
+                buf[8] = 0;
+                usb_send_in_buffer(1, 9);
+                key_press = 0;
             }
             else
             {
@@ -176,7 +207,28 @@ void app_in_transaction_complete_callback(uint8_t endpoint)
         if (send)
         {
             buf = usb_get_in_buffer(1);
-            if (buf[0] & 0x01)
+            if (pause)
+            {
+              buf[0] = 0x02;
+              buf[1] = 0;
+              usb_send_in_buffer(1, 2);
+              pause = false;
+            }
+            else if (next)
+            {
+              buf[0] = 0x02;
+              buf[1] = 0;
+              usb_send_in_buffer(1, 2);
+              next = false;
+            }
+            else if (prev)
+            {
+              buf[0] = 0x02;
+              buf[1] = 0;
+              usb_send_in_buffer(1, 2);
+              prev = false;
+            }
+            else if (stop)
             {
                 buf[0] = 0x01;
                 buf[1] = 0;
@@ -189,13 +241,18 @@ void app_in_transaction_complete_callback(uint8_t endpoint)
                 buf[8] = 0;
                 usb_send_in_buffer(1, 9);
             }
-
-            if (pause)
+            else
             {
-              buf[0] = 0x02;
-              buf[1] = 0;
-              usb_send_in_buffer(1, 2);
-              pause = false;
+                buf[0] = 0x01;
+                buf[1] = 0;
+                buf[2] = 0;
+                buf[3] = 0;
+                buf[4] = 0;
+                buf[5] = 0;
+                buf[6] = 0;
+                buf[7] = 0;
+                buf[8] = 0;
+                usb_send_in_buffer(1, 9);
             }
             send = false;
         }

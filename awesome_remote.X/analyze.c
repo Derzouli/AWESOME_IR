@@ -45,6 +45,18 @@ u32 repeat_trame(u32 prev_trame)
     switch (prev_trame)
     {
         case K_1:
+            trame = K_DOT;
+            break;
+        case K_DOT:
+            trame = K_SLASH;
+            break;
+        case K_SLASH:
+            trame = K_COLON;
+            break;
+        case K_COLON:
+            trame = K_1;
+            break;
+        case K_2:
             trame = K_A;
             break;
         case K_A:
@@ -54,7 +66,103 @@ u32 repeat_trame(u32 prev_trame)
             trame = K_C;
             break;
         case K_C:
-            trame = K_1;
+            trame = K_2;
+            break;
+        case K_3:
+            trame = K_D;
+            break;
+        case K_D:
+            trame = K_E;
+            break;
+        case K_E:
+            trame = K_F;
+            break;
+        case K_F:
+            trame = K_3;
+            break;
+        case K_4:
+            trame = K_G;
+            break;
+        case K_G:
+            trame = K_H;
+            break;
+        case K_H:
+            trame = K_I;
+            break;
+        case K_I:
+            trame = K_4;
+            break;
+        case K_5:
+            trame = K_J;
+            break;
+        case K_J:
+            trame = K_K;
+            break;
+        case K_K:
+            trame = K_L;
+            break;
+        case K_L:
+            trame = K_5;
+            break;
+        case K_6:
+            trame = K_M;
+            break;
+        case K_M:
+            trame = K_N;
+            break;
+        case K_N:
+            trame = K_O;
+            break;
+        case K_O:
+            trame = K_6;
+            break;
+        case K_7:
+            trame = K_P;
+            break;
+        case K_P:
+            trame = K_Q;
+            break;
+        case K_Q:
+            trame = K_R;
+            break;
+        case K_R:
+            trame = K_S;
+            break;
+        case K_S:
+            trame = K_7;
+            break;
+        case K_8:
+            trame = K_T;
+            break;
+        case K_T:
+            trame = K_U;
+            break;
+        case K_U:
+            trame = K_V;
+            break;
+        case K_V:
+            trame = K_8;
+            break;
+        case K_9:
+            trame = K_W;
+            break;
+        case K_W:
+            trame = K_X;
+            break;
+        case K_X:
+            trame = K_Y;
+            break;
+        case K_Y:
+            trame = K_Z;
+            break;
+        case K_Z:
+            trame = K_9;
+            break;
+        case K_0:
+            trame = K_SPACE;
+            break;
+        case K_SPACE:
+            trame = K_0;
             break;
     }
     return (trame);
@@ -192,6 +300,21 @@ u8 trame_to_keycode(u32 trame)
         case K_Z:
             key_press = 0x1D;
             break;
+        case K_SLASH:
+            key_press = 0x38;
+            break;
+        case K_COLON:
+            key_press = 0x33;
+            break;
+        case K_DOT:
+            key_press = 0x37;
+            break;
+        case K_CAPSLOCK:
+            key_press = 0x39;
+            break;
+        case K_SPACE:
+            key_press = 0x2c;
+            break;
         case K_DEL:
             key_press = 0x2A;
             break;
@@ -214,7 +337,16 @@ u8 trame_to_keycode(u32 trame)
             key_press = 0x58;
             break;
         case K_PAUSE:
-            key_press = 0xB0;
+            key_press = 0xCD;
+            break;
+        case K_NEXT:
+            key_press = 0xB5;
+            break;
+        case K_PREV:
+            key_press = 0xB6;
+            break;
+        case K_STOP:
+            key_press = 0xB7;
             break;
         default:
             uart_putstr("Unmapped key : ");
