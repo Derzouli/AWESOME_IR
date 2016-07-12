@@ -9,6 +9,7 @@
 volatile u32 g_reception[30][35];
 volatile u32 c = 0;
 volatile s8 d = 0;
+bool consumer = false;
 
 __attribute__((interrupt(IPL4AUTO), nomips16, vector(_TIMER_3_VECTOR)))
 void        trame_check(void)
@@ -40,10 +41,10 @@ int main(void)
 #endif
     // init ( sys_clk_speed , uart_transfert_speed )
     init(40000000, 9600);
-    uart_putstr("Device initialized\n\rInit USB...\n\r");
-    usb_init();
+    //uart_putstr("Device initialized\n\rInit USB...\n\r");
     asm("ei");
-
+    usb_init();
+   
     u8 a = 0, i = 0;
     u8 key_press = 0;
     u8 *buf = NULL;
@@ -74,7 +75,7 @@ int main(void)
                     if (trame != 0)
                     {
                         key_press = 42;
-                        prev_trame = trame;b1bca111
+                        prev_trame = trame;
                     }
                     else
                         key_press = trame_to_keycode(prev_trame);
@@ -87,24 +88,68 @@ int main(void)
                 send = true;
                 key_press = trame_to_keycode(trame);
                 trame = 0;
-        }
-        
-        if (usb_is_configured() &&
+        }   
+
+        if (send && usb_is_configured() &&
             !usb_in_endpoint_halted(1) &&
                 !usb_in_endpoint_busy(1))
         {
             buf = usb_get_in_buffer(1);
-            buf[0] = 0;
-            buf[1] = 0;
-            buf[2] = send ? key_press : 0;
-            buf[3] = 0;
-            buf[4] = 0;
-            buf[5] = 0;
-            buf[6] = 0;
-            buf[7] = 0;
-
-            usb_send_in_buffer(1, 8);
-
+            if (key_press == 0xCD)
+            {
+                buf[0] = 0x02;
+                buf[1] = 0b1000; // PAUSE
+                consumer = true;
+                usb_send_in_buffer(1, 2);
+            }
+            else if (key_press == 0xB5)
+            {
+                buf[0] = 0x02;
+                buf[1] = 0b1; // NEXT
+                consumer = true;
+                usb_send_in_buffer(1, 2);
+            }
+            else if (key_press == 0xB6)
+            {
+                buf[0] = 0x02;
+                buf[1] = 0b10; // PREV
+                consumer = true;
+                usb_send_in_buffer(1, 2);
+            }
+            else if (key_press == 0xe2)
+            {
+                buf[0] = 0x02;
+                buf[1] = 0b10000; //MUTE
+                consumer = true;
+                usb_send_in_buffer(1, 2);
+            }
+            else if (key_press == 0xe9)
+            {
+                buf[0] = 0x02;
+                buf[1] = 0b100000;
+                consumer = true; // VOL UP
+                usb_send_in_buffer(1, 2);
+            }
+            else if (key_press == 0xea)
+            {
+                buf[0] = 0x02;
+                buf[1] = 0b1000000;
+                consumer = true; // VOL DOWN
+                usb_send_in_buffer(1, 2);
+            }
+            else
+            {
+                buf[0] = 0x01;
+                buf[1] = 0;
+                buf[2] = 0;
+                buf[3] = key_press;
+                buf[4] = 0;
+                buf[5] = 0;
+                buf[6] = 0;
+                buf[7] = 0;
+                buf[9] = 0;
+                usb_send_in_buffer(1, 9);
+            }
             send = false;
         }
 
@@ -129,10 +174,7 @@ uint16_t app_get_device_status_callback()
 
 void app_endpoint_halt_callback(uint8_t endpoint, bool halted)
 {
-        uart_putstr("HALTED = ");
-        uart_putnbr(halted, 2);
-        uart_putstr("on endpoint ");
-        uart_putnbr(endpoint, 10);
+  
 }
 
 int8_t app_set_interface_callback(uint8_t interface, uint8_t alt_setting)
@@ -158,18 +200,29 @@ void app_in_transaction_complete_callback(uint8_t endpoint)
     if (endpoint == 1)
     {
         LATBbits.LATB3 = 0;
-        if (send)
+        if (send == true)
         {
             buf = usb_get_in_buffer(1);
-            buf[0] = 0;
-            buf[1] = 0;
-            buf[2] = 0;
-            buf[3] = 0;
-            buf[4] = 0;
-            buf[5] = 0;
-            buf[6] = 0;
-            buf[7] = 0;
-            usb_send_in_buffer(1, 8);
+            if (consumer == true)
+            {
+                buf[0] = 0x02;
+                buf[1] = 0;
+                usb_send_in_buffer(1, 2);
+                consumer = false;
+            }
+            else
+            {
+                buf[0] = 0x01;
+                buf[1] = 0;
+                buf[2] = 0;
+                buf[3] = 0;
+                buf[4] = 0;
+                buf[5] = 0;
+                buf[6] = 0;
+                buf[7] = 0;
+                buf[8] = 0;
+                usb_send_in_buffer(1, 9);
+            }
             send = false;
         }
         else

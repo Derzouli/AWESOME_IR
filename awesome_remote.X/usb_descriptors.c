@@ -80,8 +80,8 @@ const ROMPTR struct device_descriptor this_device_descriptor =
 	0x00, // Device Subclass
 	0x00, // Protocol.
 	EP_0_LEN, // bMaxPacketSize0
-        0x04D8,                         // Vendor ID
-        0x0055,                         // Product ID
+        0x0,                         // Vendor ID
+        0x0,                         // Product ID
         0x0100,                         // Device release number in BCD format
 	1, // Manufacturer
 	2, // Product
@@ -96,39 +96,28 @@ static const ROMPTR uint8_t keyboard_report_descriptor[] = {
  //   0x05, 0x01, // USAGE_PAGE (Generic Desktop)
  //   0x09, 0x06, // USAGE (Keyboard)
    
- //   0xa1, 0x01, // COLLECTION (Application)
- //   0x05, 0x07, //      USAGE_PAGE (Key Codes)
- //   0x19, 0xe0, //      USAGE_MINIMUM (Keyboard LeftControl)
- //   0x29, 0xe7, //      USAGE_MAXIMUM (Keyboard Right GUI)
- //   0x15, 0x00, //      LOGICAL_MINIMUM (0)
- //   0x25, 0x01, //      LOGICAL_MAXIMUM (1)
- //   0x75, 0x01, //      REPORT_SIZE (1)
- //   0x95, 0x08, //      REPORT_COUNT (8)
- //   0x81, 0x02, //      INPUT (Data,Var,Abs)
- //   0x95, 0x01, //      REPORT_COUNT (1)
- //   0x75, 0x08, //      REPORT_SIZE (8)
- //   0x81, 0x03, //      INPUT (Constant)
- //   0x95, 0x05, //      REPORT_COUNT (5)
- //   0x75, 0x01, //      REPORT_SIZE (1)
+	0x05, 0x0c, /*		Usage Page (Consumer Devices)		*/
+	0x09, 0x01, /*		Usage (Consumer Control)			*/
+	0xA1, 0x01, /*		Collection (Application)			*/
+	0x85, 0x02,	/*		Report ID=2							*/
+	0x05, 0x0c, /*		Usage Page (Consumer Devices)		*/
+	0x15, 0x00, /*		Logical Minimum (0)					*/
+	0x25, 0x01, /*		Logical Maximum (1)					*/
+	0x75, 0x01, /*		Report Size (1)						*/
+	0x95, 0x07, /*		Report Count (7)					*/
+	0x09, 0xb5, /*		Usage (Scan Next Track)				*/
+	0x09, 0xb6, /*		Usage (Scan Previous Track)			*/
+	0x09, 0xb7, /*		Usage (stop)						*/
+	0x09, 0xcd, /*		Usage (Play / Pause) */
+	0x09, 0xe2, /*		Usage (Mute)						*/
+        0x09, 0xe9, /*		Usage (Volume Up)						*/
+        0x09, 0xea, /*		Usage (Volume Down)     */				
+	0x81, 0x02, /*		Input (Data, Variable, Absolute)	*/
+	0x95, 0x01, /*		Report Count (1)					*/
+	0x81, 0x01, /*		Input (Constant)					*/
+	0xc0,		/*		End Collection						*/
 
- //   0x05, 0x08, //      USAGE_PAGE (LEDs)
- //   0x19, 0x01, //      USAGE_MINIMUM (Num Lock)
- //   0x29, 0x05, //      USAGE_MAXIMUM (Kana)
- //   0x91, 0x02, //      OUTPUT (Data,Var,Abs)
- //   0x95, 0x01, //      REPORT_COUNT (1)
- //   0x75, 0x03, //      REPORT_SIZE (3)
- //   0x91, 0x03, //      OUTPUT (Cnst,Var,Abs)
- //   0x95, 0x06, //      REPORT_COUNT (6)
- //   0x75, 0x08, //      REPORT_SIZE (8)
- //   0x15, 0x00, //      LOGICAL_MINIMUM (0)
- //   0x25, 0x65, //      LOGICAL_MAXIMUM (101)
-
- //   0x05, 0x07, //      USAGE_PAGE (Key Codes)
- //   0x19, 0x00, //      USAGE_MINIMUM (Reserved (no event indicated))
- //   0x29, 0x65, //      USAGE_MAXIMUM (Keyboard Application)
- //   0x81, 0x00, //      INPUT (Data, Array) ; key arrays (6 bytes)
- //   0xc0        // End Collection
-
+        0x85, 0x01,                    // REPORT_ID (1)
 /*  USAGE_PAGE (Generic Desktop)                            */      0x05, 0x01,
 /*  USAGE (Keyboard)                                        */      0x09, 0x06,
 /*  COLLECTION (Application)                                */      0xA1, 0x01,
@@ -220,15 +209,15 @@ static const ROMPTR struct configuration_1_packet configuration_1 =
 	1, // bInterval in ms.
 	},
 
-//	{
-//	// Members of the Endpoint Descriptor (EP1 OUT)
-//	sizeof(struct endpoint_descriptor),
-//	DESC_ENDPOINT,
-//	0x01 /*| 0x00*/, // endpoint #1 0x00=OUT
-//	EP_INTERRUPT, // bmAttributes
-//	EP_1_OUT_LEN, // wMaxPacketSize
-//	1, // bInterval in ms.
-//	},
+	{
+	// Members of the Endpoint Descriptor (EP1 OUT)
+	sizeof(struct endpoint_descriptor),
+	DESC_ENDPOINT,
+	0x01 /*| 0x00*/, // endpoint #1 0x00=OUT
+	EP_INTERRUPT, // bmAttributes
+	EP_1_OUT_LEN, // wMaxPacketSize
+	1, // bInterval in ms.
+	},
 
 };
 
@@ -250,19 +239,19 @@ static const ROMPTR struct {uint8_t bLength;uint8_t bDescriptorType; uint16_t la
 	0x0409 // US English
 };
 
-static const ROMPTR struct {uint8_t bLength;uint8_t bDescriptorType; uint16_t chars[17]; } vendor_string = {
+static const ROMPTR struct {uint8_t bLength;uint8_t bDescriptorType; uint16_t chars[18]; } vendor_string = {
 	sizeof(vendor_string),
 	DESC_STRING,
         {'A','w','e','s','o','m','e',' ','T','e','a','m',' ','I','n','c','.'}
 };
 
-static const ROMPTR struct {uint8_t bLength;uint8_t bDescriptorType; uint16_t chars[14]; } product_string = {
+static const ROMPTR struct {uint8_t bLength;uint8_t bDescriptorType; uint16_t chars[15]; } product_string = {
 	sizeof(product_string),
 	DESC_STRING,
 	{'A','w','e','s','o','m','e',' ','D','e','v','i','c','e'}
 };
 
-static const ROMPTR struct {uint8_t bLength;uint8_t bDescriptorType; uint16_t chars[11]; } interface_string = {
+static const ROMPTR struct {uint8_t bLength;uint8_t bDescriptorType; uint16_t chars[12]; } interface_string = {
 	sizeof(interface_string),
 	DESC_STRING,
 	{'I','n','t','e','r','f','a','c','e',' ','1'}
@@ -297,7 +286,6 @@ int16_t usb_application_get_string(uint8_t string_number, const void **ptr)
 		   a serial number out of EEPROM and return it. */
 		return -1;
 	}
-
 	return -1;
 }
 

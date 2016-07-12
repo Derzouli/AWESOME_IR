@@ -33,8 +33,8 @@
 /* Only 8, 16, 32 and 64 are supported for endpoint zero length. */
 #define EP_0_LEN 64
 
-#define EP_1_OUT_LEN 8
-#define EP_1_IN_LEN 8
+#define EP_1_OUT_LEN 9
+#define EP_1_IN_LEN 9
 
 #define NUMBER_OF_CONFIGURATIONS 1
 
