@@ -354,7 +354,7 @@ u8 trame_to_keycode(u32 trame)
             key_press = 0x2b;
             break;
         case K_ALT:
-            key_press = 0x77;
+            key_press = 0x46;
     }
     return (key_press);
 }
